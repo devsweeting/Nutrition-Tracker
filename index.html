@@ -18,7 +18,54 @@
   </head>
   <body>
 
-    hello world
+    <div class="container">
+       <h1>Add Food</h1>
+       <div class="row">
+         <div class="col-md-6">
+           <hr>
+           <h2>Add Food</h2>
+           <form id="new-food">
+             <label>Select a Type of Food</label>
+             <div class="form-group">
+               <select class="form-control" id="typeOfFood">
+                 <option>Fruit</option>
+                 <option>Vegetable</option>
+                 <option>Meat, Poultry, Fish, Beans</option>
+                 <option>Bread, Cereal, Rice, and Pasta</option>
+                 <option>Dairy</option>
+                 <option>Fats, Oils, and Sweets</option>
+               </select>
+            </div>
+             <div class="form-group">
+               <label for="new-food-name">Food Name</label>
+               <input type="text"  class="form-control" id="new-food-name">
+             </div>
+             <div class="form-group">
+               <label for="new-serving-size">Serving Size (g)</label>
+               <input type="text"  class="form-control" id="new-serving-size">
+             </div>
+             <div class="form-group">
+               <label for="new-calories">Calories</label>
+               <input type="text"  class="form-control" id="new-calories">
+             </div>
+             <div class="form-group">
+               <label for="new-carbohydrates">Carbohydrates</label>
+               <input type="text"  class="form-control" id="new-carbohydrates">
+             </div>
+             <div class="form-group">
+               <label for="new-protein">Protein</label>
+               <input type="text"  class="form-control" id="new-protein">
+             </div>
+             <div class="form-group">
+               <label for="new-fats">Fats</label>
+               <input type="text"  class="form-control" id="new-fats">
+             </div>
+             <div class="form-group">
+               <label for="new-sodium">Sodium</label>
+               <input type="text"  class="form-control" id="new-sodium">
+             </div>
+             <button type="submit" class="btn-primary">Add</button>
+           </form>
 
   </body>
 </html>
