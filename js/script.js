@@ -1,5 +1,27 @@
 // https://ndb.nal.usda.gov/ndb/search/list
 
+function nutritionOutput(data) {
+  const incomingData =  data.nutrients;
+  // nutrient_id: "208" (cals)
+  // nutrient_id: "307" (sodium)
+  // nutrient_id: "204" (fat)
+  // nutrient_id: "205" (carbs)
+  // nutrient_id: "203" (protein)
+  // nutrient_id: "269" (sugars)
+
+  const capturedData = ["208","307","204","205","203","269"];
+  let returnedData = [];
+
+  for (let i =0; i< capturedData.length; i++) {
+    for (let e in incomingData) {
+      if (incomingData[e].nutrient_id === capturedData[i]) {
+        returnedData.push(incomingData[e])
+      }
+    }
+  }
+  return returnedData
+}
+
 function nbSearch(q) {
   const apiKey = 'mhNpLtFVjwZ2FqugLnJYF8T4cCKIhiIGTAGOVSvP';
   let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${q}&sort=n&max=25&offset=0&api_key=${apiKey}`;
@@ -18,28 +40,27 @@ function nutritionSearch(q) {
 
   fetch(url)
     .then(response=>response.json())
-    .then(r=> {
-      console.log(r.foods[0].food)
-      return r.foods[0].food;
+    .then(results=>{
+      // console.log(results.foods[0].food)
 
-    });
+      console.log(nutritionOutput(results.foods[0].food));
+
+      $(".output").html(results.foods[0].food.desc.name)
+      // return
+    })
+
+
 }
 
 
 $(function() {
   $("#ndbno").keyup(function() {
-    // console.log($("#ndbno").val())
-    nbSearch($("#ndbno").val());
+    // nbSearch($("#ndbno").val());
+
   })
 
   $("#submit").click(function() {
-    let foodItem = $("#ndbno").val();
-
-    nutritionSearch(foodItem)
-
-    // console.log(output)
-
-
+    nutritionSearch($("#ndbno").val())
   });
 
 
