@@ -20,6 +20,7 @@ function displayFoodDetails(pantryDisplay) {
     htmlForFoodInfo += "<li id=" + food.id + ">" + food.name + "</li>";
   });
   foodList.html(htmlForFoodInfo)
+  console.log(htmlForFoodInfo);
 };
 
 function showFood (foodId) {
@@ -27,10 +28,10 @@ function showFood (foodId) {
   $("#pantry").show();
   $(".new-food-name").html(food.name);
   $(".new-serving-size").html(food.servivng);
-  $(".new-calories").html(food.calories);  $(".new-food-name").html(food.name);
+  $(".new-calories").html(food.calories);
   $(".new-carbohydrates").html(food.carbs);
   $(".new-protein").html(food.sodium);
-  $(".new-fats").html(food.protein);  $(".new-food-name").html(food.name);
+  $(".new-fats").html(food.protein);
   $(".new-sodium").html(food.fat);
   $("#typeOfFood").html(food.type);
   var buttons = $("#buttons");
