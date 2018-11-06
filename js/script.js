@@ -44,11 +44,15 @@ function nutritionSearch(q) {
   fetch(url)
     .then(response=>response.json())
     .then(results=>{
+      const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
+      
       console.log("RAW:",results.foods[0]);
 
       nutritionDataGetter(results.foods[0].food);
+
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
-      $("th#name").html(results.foods[0].food.desc.name.replace(/,\sUPC:\s\d*$/g,""));
+      $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
+
     })
 }
 
