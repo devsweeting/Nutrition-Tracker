@@ -7,7 +7,7 @@ function nutritionTableDraw(formattedData) {
     if (entry.nid) {
       formattedHTML.push(`<tr>
         <td>${entry.display_name}</td>
-        <td>${entry.value} ${entry.unit}</td>
+        ${entry.value ? (`<td>${entry.value} ${entry.unit}</td>`):(`<td>N/A</td>`)}
       </tr>`);
     }});
 
