@@ -44,12 +44,18 @@ function nbSearch(q) {
     .then(response => response.json())
     .then(r=> {
       if(r.list.item){
-        r.list.item.forEach(result => {
-          console.log("name: ",result.name,"ndbno:",result.ndbno)
+        let htmlOutput = [];
+        r.list.item.forEach(function(entry) {
+          htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`)
         })
-        console.log("NDB Id:",r.list.item)
+        $("#live-search-results").html(htmlOutput.join(""))
+        // console.log("NDB Id:",r.list.item)
       }
-    }).catch(e=>console.log('error in ndbno query:',e))
+    }).catch(e=>{
+      console.log('error in ndbno query:',e);
+      $("#live-search-results").html(`<a class="dropdown-item" href="#" id="full">no results found</a>`)
+
+    })
 }
 
 function nutritionSearch(q) {
@@ -68,11 +74,22 @@ function nutritionSearch(q) {
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
 
-    })
+    }).catch(e=>console.log('error in search:',e))
 }
 
 $(function() {
+  // $("#live-search-results").removeClass("search-hidden")
+
+  $("#live-search-results").on('click', 'a', function() {
+    console.log(this.id)
+    nutritionSearch(this.id)
+    $("#live-search-results").addClass("search-hidden")
+
+  })
+
   $("#ndbno").keyup(function() {
+    $("#live-search-results").removeClass("search-hidden")
+
     nbSearch($("#ndbno").val());
   });
 
