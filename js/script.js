@@ -13,7 +13,6 @@ function Food (name, serving, calories, carbs, sodium, protein, fat, type, fav=f
   this.fav = fav
 }
 
-
 function displayFoodDetails(pantryDisplay) {
   var foodList = $("ul#pantry");
   var htmlForFoodInfo = "";
@@ -51,15 +50,10 @@ function showFood (foodId, pantry) {
 }
 
 function attachFoodListeners(pantry) {
-  console.log(pantry.favoriteFoods.length)
   $("ul#pantry").on("click", "li", function(){
     showFood(this.id, pantry);
     displayFoodDetails(pantry);
   });
-  // $("ul#pantry").on("click", "li", function(){
-  //   $(showFood(this.id)).hide();
-  //   $(displayFoodDetails(pantry)).hide();
-  // });
 
   $("#buttons").on("click", ".favoriteButton", function(){
     // add food to fav list
@@ -69,11 +63,7 @@ function attachFoodListeners(pantry) {
   });
 };
 
-
-
 // Daily pantry list
-
-
 Pantry.prototype.findFavorite = function(id) {
   for (var i=0; i<this.foods.length; i++) {
     if (this.foods[i]) {
@@ -85,7 +75,7 @@ Pantry.prototype.findFavorite = function(id) {
     }
   };
 }
-//
+
 Pantry.prototype.addFavoriteToDisplay = function(id) {
   var endIndex = this.favoriteFoods.length - 1;
   console.log(this.favoriteFoods[endIndex].id);
@@ -96,7 +86,6 @@ function Pantry() {
   this.foods = [],
   this.currentId = 0,
   this.favoriteFoods = []
-
 }
 
 Pantry.prototype.addFood = function(food) {
@@ -128,14 +117,12 @@ Pantry.prototype.deleteFood = function(id) {
   };
   return false;
 }
-
-
+//example foods
 var apple = new Food('apple', '1', '95', '25', '0', '0', '2mg');
 var banana = new Food('banana', '1', '105', '27', '1.3', '0.4', '1mg');
 var blueberries = new Food('blueberries', '1 cup', '85', '21', '1.1', '0.5', '1mg');
 var orange = new Food('orange', '1', '45', '11', '0.9', '0.1', '0.0mg');
 var broccoli =  new Food('broccoli', '3 cups', '50', '10', '4.2', '.5', '0.0mg');
-
 
 //user interface logic
 $(document).ready(function(){
@@ -160,14 +147,8 @@ $(document).ready(function(){
     parseInt($("input#new-sodium").val(""));
     $("select#typeOfFood").val("");
 
-
     var newFood = new Food(inputtedFoodName, inputtedServingSize, inputtedCalories, inputtedCarbs, inputtedProtein, inputtedFat, inputtedSodium, inputtedTypeOfFood);
     pantry.addFood(newFood);
-
-
-
-  //  displayFoodFavorite(favFoods);
     displayFoodDetails(pantry);
   })
-
 })
