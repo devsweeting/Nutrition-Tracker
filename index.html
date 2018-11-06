@@ -19,6 +19,58 @@
   <body>
 
     <div class="container">
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">&nbsp;</label>
+        <input type="text" class="form-control" placeholder="Search for food" id="ndbno">
+        <div class="live-search search-hidden" id="live-search-results" >
+          <!-- <a class="dropdown-item" href="#">Action</a> -->
+        </div>
+        <button type="button" class="btn btn-primary" name="button" id="submit">Search</button>
+      </div>
+
+      <div class="col-md-6 output nutrition-info">
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col" colspan="2" id="name" ></th>
+              <!-- 45090566 -->
+            </tr>
+          </thead>
+          <tbody id="food-data">
+            <tr>
+              <td>Calories</td>
+              <td id="cals">cals</td>
+            <tr>
+              <td>Total fats</td>
+              <td id="fats">fats</td>
+            </tr>
+            <tr>
+              <td>Total carbs</td>
+              <td id="carbs">carbs</td>
+            </tr>
+            <tr>
+              <td>Protein</td>
+              <td id="protein">pro</td>
+            </tr>
+              <td>Sugars</td>
+              <td id="sugars">sugs</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+        <small id="ingredients"></small>
+        <div class="">
+          <button type="button" name="button" class="btn btn-primary" id="add-food">Add to food tracker</button>
+
+        </div>
+
+      </div>
+
+
+
+
        <h1>Add Food</h1>
        <div class="row">
          <div class="col-md-6">
