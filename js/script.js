@@ -22,7 +22,7 @@ function nutritionDataGetter(data) {
       }
     }
   }
-  // nutritionTableDraw(returnedData)
+  nutritionTableDraw(returnedData)
   return returnedData
 }
 
@@ -33,8 +33,16 @@ function nbSearch(q) {
   fetch(url)
     .then(response => response.json())
     .then(r=> {
-      console.log("NDB Id:",r.list.item)
-    })
+      // console.log(r)
+      if(r.list.item){
+        r.list.item.forEach(result => {
+          console.log("name: ",result.name,"ndbno:",result.ndbno)
+        })
+
+        console.log("NDB Id:",r.list.item)
+
+      }
+    }).catch(e=>console.log('error in ndbno query:',e))
 }
 
 function nutritionSearch(q) {
@@ -45,7 +53,7 @@ function nutritionSearch(q) {
     .then(response=>response.json())
     .then(results=>{
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
-      
+
       console.log("RAW:",results.foods[0]);
 
       nutritionDataGetter(results.foods[0].food);
