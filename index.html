@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/script.js"></script>
 
     <!-- CSS: Bootstrap & site styling -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/styles.css">
 
     <meta charset="utf-8">
@@ -24,33 +24,43 @@
     </div>
 
 <!-- search bar -->
-    <div class="container searchbar">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search USDA Database..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
+    <div class="container-fluid">
+      <div class="searchbar">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search USDA Database..">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
       </div>
     </div>
+    <div class="wrapper">
 
-    <div class="container-fluid row-body">
-      <div class="row">
+    <div class="container-fluid food-body">
+      <div class="row mx-auto" >
         <div class="col-md-2 sidenav">
           <div class="well">
-
+          </div>
+          <div class="container fav-body">
             <h4>Favorite Foods</h4>
-            <ul id="favorites">
-              <!-- favorites added here -->
-            </ul>
+            <p>See your food log</p>
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Food log</button>
+            <div id="fav-dropdown" class="collapse">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              <ul id="favorites">
+                <!-- favorites added here -->
+              </ul>
+            </div>
           </div>
         </div>
 
 
 
-      <!-- <div class="row"> -->
-         <div class="col-md-6">
+         <div class="col-md-5 input-food">
            <h2>Add Food</h2>
            <hr>
            <form id="new-food">
@@ -93,32 +103,85 @@
                <label for="new-sodium">Sodium</label>
                <input type="text"  class="form-control" id="new-sodium">
              </div>
-             <button type="submit" class="btn-primary">Add to daily Foods</button>
+             <button type="submit" class="btn-success">Add to Food Log</button>
            </form>
          </div>
 
-           <div class="col-md-4">
+
+         <div class="food-log">
+           <div class="col-md-3">
              <h4>Food log</h4>
-             <ul id="pantry">
+             <ul class="list-group" id="pantry">
                <!-- Pantry added here -->
              </ul>
 
-
-             <div id="show-foods" class="col-md-6 col-md-offset-6">
-               <p>Food: <span class="new-food-name"></span></p>
-               <p>Serving Size: <span class="new-serving-size"></span></p>
-               <p>Calories: <span class="new-calories"></span></p>
-               <p>Carbohydrates: <span class="new-carbohydrates"></span></p>
-               <p>Protein: <span class="new-protein"></span></p>
-               <p>Fat Content: <span class="new-fats"></span></p>
-               <p>Sodium Content: <span class="new-sodium"></span></p>
-               <p>Food Group: <span class="new-type"></span></p>
-               <div id="buttons">
+             <div class="card" style="width: 18rem;">
+               <img class="card-img-top" src="img/greens-nutrition.png" alt="greens-nutrition">
+               <div class="card-body">
+                 <h5 class="card-title">Nutrition Data</h5>
+                 <div class="card-text">
+                   <div id="show-foods" class="col-md-6 col-md-offset-6">
+                     <p>Food: <span class="new-food-name"></span></p>
+                     <p>Serving Size: <span class="new-serving-size"></span></p>
+                     <p>Calories: <span class="new-calories"></span></p>
+                     <p>Carbs: <span class="new-carbohydrates"></span></p>
+                     <p>Protein: <span class="new-protein"></span></p>
+                     <p>Fat Content: <span class="new-fats"></span></p>
+                     <p>Sodium Content: <span class="new-sodium"></span></p>
+                     <p>Food Group: <span class="new-type"></span></p>
+                   </div>
+                   <div id="buttons">
+                   </div>
+                 </div>
                </div>
              </div>
            </div>
          </div>
-       </div>
 
+       </div>
+     </div>
+       <br>
+</div>
+   <footer>
+     <div class="container">
+       <div class="row">
+         <div class="col-md-2">
+           <div class="well">
+             <p>Fruit</p>
+           </div>
+         </div>
+
+         <!-- <div class="col-md-2">
+           <div class="well">
+             <p>Vegetables</p>
+           </div>
+         </div>
+
+         <div class="col-md-2">
+           <div class="well">
+             <p>Meat, Poul</p>
+           </div>
+         </div>
+
+         <div class="col-md-2">
+           <div class="well">
+             <p>Apple</p>
+           </div>
+         </div>
+
+         <div class="col-md-2">
+           <div class="well">
+             <p>Apple</p>
+           </div>
+         </div>
+
+         <div class="col-md-2">
+           <div class="well">
+             <p>Apple</p>
+           </div>
+         </div> -->
+       </div>
+     </div>
+   </footer>
   </body>
 </html>
