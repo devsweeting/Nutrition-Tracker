@@ -1,5 +1,9 @@
+button {
+  margin-top: 10px;
+}
+
 .nutrition-info {
-  /* display: none; */
+  display: none;
 }
 
 .search-hidden {

@@ -9,11 +9,12 @@ function nutritionTableDraw(formattedData) {
       <td>${entry.value}${entry.unit}</td>
     </tr>`)});
 
+  $(".nutrition-info").show();
   $("#food-data").html(formattedHTML.join(""));
 }
 
 function nutritionDataGetter(data) {
-  const incomingData =  data.nutrients;
+  const incomingData = data.nutrients;
 
   let newData = [
     {nid: "208", display_name: "Calories", value: null, unit: null},
@@ -32,7 +33,6 @@ function nutritionDataGetter(data) {
       }
     }
   }
-
   nutritionTableDraw(newData);
 }
 
@@ -43,19 +43,22 @@ function nbSearch(q) {
   fetch(url)
     .then(response => response.json())
     .then(r=> {
+
       if(r.list.item){
+        if (r.list.item.length===1) {
+          console.log('only one result')
+        }
         let htmlOutput = [];
         r.list.item.forEach(function(entry) {
-          htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`)
+          htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`);
         })
-        $("#live-search-results").html(htmlOutput.join(""))
+        $("#live-search-results").html(htmlOutput.join(""));
         // console.log("NDB Id:",r.list.item)
       }
     }).catch(e=>{
-      console.log('error in ndbno query:',e);
-      $("#live-search-results").html(`<a class="dropdown-item" href="#" id="full">no results found</a>`)
-
-    })
+      console.log('no results found');
+      $("#live-search-results").html(`<a class="dropdown-item" href="#" id="full">no results found</a>`);
+    });
 }
 
 function nutritionSearch(q) {
@@ -66,34 +69,29 @@ function nutritionSearch(q) {
     .then(response=>response.json())
     .then(results=>{
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
-
-      console.log("RAW:",results.foods[0]);
-
       nutritionDataGetter(results.foods[0].food);
 
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
 
-    }).catch(e=>console.log('error in search:',e))
+    }).catch(e=>console.log('error in search:',e));
 }
 
 $(function() {
-  // $("#live-search-results").removeClass("search-hidden")
-
   $("#live-search-results").on('click', 'a', function() {
-    console.log(this.id)
-    nutritionSearch(this.id)
-    $("#live-search-results").addClass("search-hidden")
+    nutritionSearch(this.id);
+    $("#live-search-results").addClass("search-hidden");
+  });
 
-  })
 
-  $("#ndbno").keyup(function() {
-    $("#live-search-results").removeClass("search-hidden")
-
+  $("input#ndbno").keyup(function(event) {
+    $("#live-search-results").removeClass("search-hidden");
     nbSearch($("#ndbno").val());
+
+    event.key === "Escape" ? ($("#live-search-results").addClass("search-hidden")):(null);
   });
 
   $("#submit").click(function() {
-    nutritionSearch($("#ndbno").val())
+    nutritionSearch($("#ndbno").val());
   });
 });
