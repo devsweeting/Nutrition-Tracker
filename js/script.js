@@ -1,8 +1,89 @@
 //business logic
+function nutritionTableDraw(formattedData) {
+  let formattedHTML = [];
+
+  formattedData.forEach(function(entry) {
+    if (entry.nid) {
+      formattedHTML.push(`<tr>
+        <td>${entry.display_name}</td>
+        ${entry.value ? (`<td>${entry.value} ${entry.unit}</td>`):(`<td>N/A</td>`)}
+      </tr>`);
+    }});
+
+  $(".nutrition-info").show();
+  $("#food-data").html(formattedHTML.join(""));
+}
+
+function nutritionDataGetter(data) {
+  let parsedData = [
+    {raw: data},
+    {nid: "208", display_name: "Calories", value: null, unit: null},
+    {nid: "307", display_name: "Sodium", value: null, unit: null},
+    {nid: "204", display_name: "Fats", value: null, unit: null},
+    {nid: "205", display_name: "Carbohydrates", value: null, unit: null},
+    {nid: "203", display_name: "Protein", value: null, unit: null},
+    {nid: "269", display_name: "Sugars", value: null, unit: null}
+  ];
+
+  for (let i =0; i< parsedData.length; i++) {
+    for (let e in data.nutrients) {
+      if (data.nutrients[e].nutrient_id === parsedData[i].nid) {
+        parsedData[i].value = data.nutrients[e].measures[0].value;
+        parsedData[i].unit = data.nutrients[e].unit;
+      }
+    }
+  }
+  nutritionTableDraw(parsedData);
+
+  $("#add-food").click(function() {
+    // call food constructor here
+    console.log(parsedData)
+  })
+}
+
+function nbSearch(q) {
+  const apiKey = 'mhNpLtFVjwZ2FqugLnJYF8T4cCKIhiIGTAGOVSvP';
+  let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${q}&sort=n&max=25&offset=0&api_key=${apiKey}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(r=> {
+
+      if(r.list.item){
+        if (r.list.item.length===1) {
+          // pressing enter will run nutritionSeach function with only captures result
+          console.log('only one result:',r.list.item[0].ndbno)
+        }
+        let htmlOutput = [];
+        r.list.item.forEach(function(entry) {
+          htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`);
+        })
+        $("#live-search-results").html(htmlOutput.join(""));
+      }
+    }).catch(e=>{
+      $("#live-search-results").html(`<a class="dropdown-item" href="#" id="full">no results found</a>`);
+    });
+}
+
+function nutritionSearch(q) {
+  const apiKey = 'mhNpLtFVjwZ2FqugLnJYF8T4cCKIhiIGTAGOVSvP';
+  let url = `https://api.nal.usda.gov/ndb/V2/reports?ndbno=${q}&&type=b&format=json&api_key=${apiKey}`;
+
+  fetch(url)
+    .then(response=>response.json())
+    .then(results=>{
+      const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
+      nutritionDataGetter(results.foods[0].food);
+
+      $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
+      $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
+
+    }).catch(e=>console.log('error in search:',e));
+}
+
 
 
 function Food (name, serving, calories, carbs, sodium, protein, fat, type, fav=false) {
-
   this.name = name,
   this.serving = serving,
   this.calories = calories,
@@ -13,7 +94,6 @@ function Food (name, serving, calories, carbs, sodium, protein, fat, type, fav=f
   this.type = type,
   this.fav = fav
 }
-console.log(Food);
 
 function displayFoodDetails(pantryDisplay) {
   var foodList = $("ul#pantry");
@@ -22,10 +102,20 @@ function displayFoodDetails(pantryDisplay) {
     htmlForFoodInfo += "<li id=" + food.id + ">" + food.name + "</li>";
   });
   foodList.html(htmlForFoodInfo);
-  console.log(htmlForFoodInfo);
+
 };
 
-function showFood (foodId) {
+function displayFoodFavorite(favoriteDisplay) {
+  var favList = $("ul#favorites");
+  var htmlForFavorites = "";
+  favoriteDisplay.pantry.favoriteFoods.forEach(function(food) {
+    htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
+  });
+  favList.html(htmlForFavorites);
+
+};
+
+function showFood (foodId, pantry) {
   var food = pantry.findFood(foodId);
   $("#show-foods").show();
   $(".new-food-name").html(food.name);
@@ -39,52 +129,39 @@ function showFood (foodId) {
   var favButton = $("#buttons");
   favButton.empty();
   favButton.append("<button class='btn btn-success favoriteButton' id="  + food.id + ">Add to Favorites</button>");
-
 }
 
-function attachFoodListeners() {
+function attachFoodListeners(pantry) {
   $("ul#pantry").on("click", "li", function(){
-    showFood(this.id);
+    showFood(this.id, pantry);
     displayFoodDetails(pantry);
   });
 
   $("#buttons").on("click", ".favoriteButton", function(){
     // add food to fav list
-  pantry.foods[this.id -1].fav = true;
-  pantry.findFavorite();
-  console.log(pantry.favoriteFoods);
-
+    pantry.foods[this.id -1].fav = true;
+    pantry.findFavorite();
+    pantry.addFavoriteToDisplay();
   });
 };
-
-function displayFoodFavorite(favoriteDisplay) {
-  var favList = $("ul#favorites");
-  var htmlForFavorites = "";
-  favoriteDisplay.foods.forEach(function(food) {
-    htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
-  });
-  favList.html(htmlForFavorites);
-  console.log(htmlForFavorites);
-};
-
-
 
 // Daily pantry list
-var pantry = new Pantry();
-// var favoriteFoods = [];
-
 Pantry.prototype.findFavorite = function(id) {
   for (var i=0; i<this.foods.length; i++) {
     if (this.foods[i]) {
       if (this.foods[i].fav === true) {
-        console.log(this.foods[i]);
-
         this.favoriteFoods.push(this.foods[i]);
         this.foods[i].fav = false;
+        console.log(this.favoriteFoods);
       }
     }
   };
-  return false;
+}
+
+Pantry.prototype.addFavoriteToDisplay = function(id) {
+  var endIndex = this.favoriteFoods.length - 1;
+  console.log(this.favoriteFoods[endIndex].id);
+  $("#favorites").append("<li id=" + this.favoriteFoods[endIndex].id+ ">" + this.favoriteFoods[endIndex].name + "</li>");
 }
 
 function Pantry() {
@@ -93,16 +170,10 @@ function Pantry() {
   this.favoriteFoods = []
 }
 
-// Pantry.prototype.favoriteFoods = function(food) {
-//   var favoriteFoods = [];
-//   return favoriteFoods;
-// }
-
 Pantry.prototype.addFood = function(food) {
   food.id = this.assignId();
   this.foods.push(food);
 }
-
 
 Pantry.prototype.assignId = function() {
   this.currentId += 1;
@@ -111,13 +182,10 @@ Pantry.prototype.assignId = function() {
 
 Pantry.prototype.findFood = function(id) {
   for (var i=0; i<this.foods.length; i++) {
-    if (this.foods[i]) {
       if (this.foods[i].id == id) {
         return this.foods[i];
       }
-    }
-  };
-  return false;
+  }
 }
 
 Pantry.prototype.deleteFood = function(id) {
@@ -131,18 +199,20 @@ Pantry.prototype.deleteFood = function(id) {
   };
   return false;
 }
-
-
+//example foods
 var apple = new Food('apple', '1', '95', '25', '0', '0', '2mg');
 var banana = new Food('banana', '1', '105', '27', '1.3', '0.4', '1mg');
 var blueberries = new Food('blueberries', '1 cup', '85', '21', '1.1', '0.5', '1mg');
 var orange = new Food('orange', '1', '45', '11', '0.9', '0.1', '0.0mg');
 var broccoli =  new Food('broccoli', '3 cups', '50', '10', '4.2', '.5', '0.0mg');
 
-
 //user interface logic
 $(document).ready(function(){
-  attachFoodListeners();
+
+  var pantry = new Pantry();
+  attachFoodListeners(pantry);
+
+
   $("form#new-food").submit(function(event){
     event.preventDefault();
     var inputtedFoodName = $("input#new-food-name").val();
@@ -164,12 +234,23 @@ $(document).ready(function(){
 
     var newFood = new Food(inputtedFoodName, inputtedServingSize, inputtedCalories, inputtedCarbs, inputtedProtein, inputtedFat, inputtedSodium, inputtedTypeOfFood);
     pantry.addFood(newFood);
-    console.log(newFood);
-    console.log(pantry);
-
-
-
     displayFoodDetails(pantry);
-  })
+  });
 
+  $("#live-search-results").on('click', 'a', function() {
+    nutritionSearch(this.id);
+    $("#live-search-results").addClass("search-hidden");
+  });
+
+
+  $("input#ndbno").keyup(function(event) {
+    $("#live-search-results").removeClass("search-hidden");
+    nbSearch($("#ndbno").val());
+
+    event.key === "Escape" ? ($("#live-search-results").addClass("search-hidden")):(null);
+  });
+
+  $("#submit").click(function() {
+    nutritionSearch($("#ndbno").val());
+  });
 })

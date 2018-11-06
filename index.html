@@ -23,165 +23,175 @@
       <h1>Food Tracker</h1>
     </div>
 
-<!-- search bar -->
+
     <div class="container">
-      <div class="searchbar">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search USDA Database..">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </span>
+      <!-- usda begins ends here -->
+
+
+    <div class="form-group">
+      <label for="ndbno">&nbsp;</label>
+      <input type="text" class="form-control" placeholder="Search for food" id="ndbno">
+      <div class="live-search search-hidden" id="live-search-results" >
+        <!-- <a class="dropdown-item" href="#">Action</a> -->
+      </div>
+      <button type="button" class="btn btn-primary" name="button" id="submit">Search</button>
+    </div>
+
+    <div class="col-md-6 output nutrition-info">
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th scope="col" colspan="2" id="name" ></th>
+          </tr>
+        </thead>
+        <tbody id="food-data">
+          <tr>
+            <td>Calories</td>
+            <td id="cals">cals</td>
+          <tr>
+            <td>Total fats</td>
+            <td id="fats">fats</td>
+          </tr>
+          <tr>
+            <td>Total carbs</td>
+            <td id="carbs">carbs</td>
+          </tr>
+          <tr>
+            <td>Protein</td>
+            <td id="protein">pro</td>
+          </tr>
+            <td>Sugars</td>
+            <td id="sugars">sugs</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+      <small id="ingredients"></small>
+      <div class="">
+        <button type="button" name="button" class="btn btn-primary" id="add-food">Add to food tracker</button>
+      </div>
+    </div>
+      <!-- usda search ends here -->
+    </div>
+
+    <div class="container food-body" class="row mx-auto">
+      <!-- <div class="row mx-auto" > -->
+      <div class="col-md-2 sidenav">
+        <div class="well"></div>
+
+        <!-- <div class="container fav-body"> -->
+        <h4>Favorite Foods</h4>
+        <p>See your food log</p>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Food log</button>
+        <div id="fav-dropdown" class="collapse">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <ul id="favorites">
+            <!-- favorites added here -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-5 input-food">
+        <h1>Add Food</h1>
+        <div class="col-md-6">
+          <hr>
+          <form id="new-food">
+            <label>Select a Type of Food</label>
+            <div class="form-group">
+              <select class="form-control" id="typeOfFood">
+                <option>Fruit</option>
+                <option>Vegetable</option>
+                <option>Meat, Poultry, Fish, Beans</option>
+                <option>Bread, Cereal, Rice, and Pasta</option>
+                <option>Dairy</option>
+                <option>Fats, Oils, and Sweets</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="new-food-name">Food Name</label>
+              <input type="text"  class="form-control" id="new-food-name">
+            </div>
+
+            <div class="form-group">
+              <label for="new-serving-size">Serving Size (g)</label>
+              <input type="text"  class="form-control" id="new-serving-size">
+            </div>
+
+            <div class="form-group">
+              <label for="new-calories">Calories</label>
+              <input type="text"  class="form-control" id="new-calories">
+            </div>
+
+            <div class="form-group">
+              <label for="new-carbohydrates">Carbohydrates</label>
+              <input type="text"  class="form-control" id="new-carbohydrates">
+            </div>
+
+            <div class="form-group">
+              <label for="new-protein">Protein</label>
+              <input type="text"  class="form-control" id="new-protein">
+            </div>
+
+            <div class="form-group">
+              <label for="new-fats">Fats</label>
+              <input type="text"  class="form-control" id="new-fats">
+            </div>
+
+            <div class="form-group">
+              <label for="new-sodium">Sodium</label>
+              <input type="text"  class="form-control" id="new-sodium">
+            </div>
+
+            <button type="submit" class="btn-success">Add to Food Log</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="food-log">
+        <div class="col-md-3 food-log">
+          <h4>Food log</h4>
+          <ul class="list-group" id="pantry">
+            <!-- Pantry added here -->
+          </ul>
+
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="img/greens-nutrition.png" alt="greens-nutrition">
+            <div class="card-body">
+              <h5 class="card-title">Nutrition Data</h5>
+              <div class="card-text">
+
+                <div id="show-foods" class="col-md-6 col-md-offset-6">
+                  <p>Food: <span class="new-food-name"></span></p>
+                  <p>Serving Size: <span class="new-serving-size"></span></p>
+                  <p>Calories: <span class="new-calories"></span></p>
+                  <p>Carbs: <span class="new-carbohydrates"></span></p>
+                  <p>Protein: <span class="new-protein"></span></p>
+                  <p>Fat Content: <span class="new-fats"></span></p>
+                  <p>Sodium Content: <span class="new-sodium"></span></p>
+                  <p>Food Group: <span class="new-type"></span></p>
+                </div>
+                <div id="buttons"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="wrapper">
 
-    <div class="container food-body" class="row mx-auto" >
-      <!-- <div class="row mx-auto" > -->
-        <div class="col-md-2 sidenav">
-          <div class="well">
-          </div>
-          <div class="container fav-body">
-            <h4>Favorite Foods</h4>
-            <p>See your food log</p>
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Food log</button>
-            <div id="fav-dropdown" class="collapse">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              <ul id="favorites">
-                <!-- favorites added here -->
-              </ul>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="well">
+              <p>Fruit</p>
             </div>
           </div>
         </div>
-
-
-
-         <div class="col-md-5 input-food">
-           <h2>Add Food</h2>
-           <hr>
-           <form id="new-food">
-             <label>Select a Type of Food</label>
-             <div class="form-group">
-               <select class="form-control" id="typeOfFood">
-                 <option>Fruit</option>
-                 <option>Vegetable</option>
-                 <option>Meat, Poultry, Fish, Beans</option>
-                 <option>Bread, Cereal, Rice, and Pasta</option>
-                 <option>Dairy</option>
-                 <option>Fats, Oils, and Sweets</option>
-               </select>
-            </div>
-             <div class="form-group">
-               <label for="new-food-name">Food Name</label>
-               <input type="text"  class="form-control" id="new-food-name">
-             </div>
-             <div class="form-group">
-               <label for="new-serving-size">Serving Size (g)</label>
-               <input type="text"  class="form-control" id="new-serving-size">
-             </div>
-             <div class="form-group">
-               <label for="new-calories">Calories</label>
-               <input type="text"  class="form-control" id="new-calories">
-             </div>
-             <div class="form-group">
-               <label for="new-carbohydrates">Carbohydrates</label>
-               <input type="text"  class="form-control" id="new-carbohydrates">
-             </div>
-             <div class="form-group">
-               <label for="new-protein">Protein</label>
-               <input type="text"  class="form-control" id="new-protein">
-             </div>
-             <div class="form-group">
-               <label for="new-fats">Fats</label>
-               <input type="text"  class="form-control" id="new-fats">
-             </div>
-             <div class="form-group">
-               <label for="new-sodium">Sodium</label>
-               <input type="text"  class="form-control" id="new-sodium">
-             </div>
-             <button type="submit" class="btn-success">Add to Food Log</button>
-           </form>
-         </div>
-
-
-         <div class="food-log">
-           <div class="col-md-3 food-log">
-             <h4>Food log</h4>
-             <ul class="list-group" id="pantry">
-               <!-- Pantry added here -->
-             </ul>
-
-             <div class="card" style="width: 18rem;">
-               <img class="card-img-top" src="img/greens-nutrition.png" alt="greens-nutrition">
-               <div class="card-body">
-                 <h5 class="card-title">Nutrition Data</h5>
-                 <div class="card-text">
-                   <div id="show-foods" class="col-md-6 col-md-offset-6">
-                     <p>Food: <span class="new-food-name"></span></p>
-                     <p>Serving Size: <span class="new-serving-size"></span></p>
-                     <p>Calories: <span class="new-calories"></span></p>
-                     <p>Carbs: <span class="new-carbohydrates"></span></p>
-                     <p>Protein: <span class="new-protein"></span></p>
-                     <p>Fat Content: <span class="new-fats"></span></p>
-                     <p>Sodium Content: <span class="new-sodium"></span></p>
-                     <p>Food Group: <span class="new-type"></span></p>
-                   </div>
-                   <div id="buttons">
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-
-       </div>
-     </div>
-       <br>
-</div>
-   <footer>
-     <div class="container">
-       <div class="row">
-         <div class="col-md-2">
-           <div class="well">
-             <p>Fruit</p>
-           </div>
-         </div>
-
-         <!-- <div class="col-md-2">
-           <div class="well">
-             <p>Vegetables</p>
-           </div>
-         </div>
-
-         <div class="col-md-2">
-           <div class="well">
-             <p>Meat, Poul</p>
-           </div>
-         </div>
-
-         <div class="col-md-2">
-           <div class="well">
-             <p>Apple</p>
-           </div>
-         </div>
-
-         <div class="col-md-2">
-           <div class="well">
-             <p>Apple</p>
-           </div>
-         </div>
-
-         <div class="col-md-2">
-           <div class="well">
-             <p>Apple</p>
-           </div>
-         </div> -->
-       </div>
-     </div>
-   </footer>
+      </div>
+    </footer>
   </body>
 </html>
