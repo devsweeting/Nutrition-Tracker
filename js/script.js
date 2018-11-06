@@ -57,29 +57,33 @@ function attachFoodListeners() {
   });
 };
 
-function displayFoodFavorite(favoriteDisplay) {
-  var favList = $("ul#favorites");
-  var htmlForFavorites = "";
-  favoriteDisplay.foods.forEach(function(food) {
-    htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
-  });
-  favList.html(htmlForFavorites);
-  console.log(htmlForFavorites);
-};
+// function displayFoodFavorite(favoriteDisplay) {
+//   var favList = $("ul#favorites");
+//   var htmlForFavorites = "";
+//   favoriteDisplay.favFoods.forEach(function {
+//     htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
+//   });
+//   favList.html(htmlForFavorites);
+//   console.log(htmlForFavorites);
+// };
 
 
 
 // Daily pantry list
 var pantry = new Pantry();
+var favFoods = pantry.favoriteFoods;
 // var favoriteFoods = [];
 
 Pantry.prototype.findFavorite = function(id) {
+  var favList = $("ul#favorites");
+  var htmlForFavorites = "";
   for (var i=0; i<this.foods.length; i++) {
     if (this.foods[i]) {
       if (this.foods[i].fav === true) {
         console.log(this.foods[i]);
-
         this.favoriteFoods.push(this.foods[i]);
+        htmlForFavorites += "<li id=" + (this.foods[i]).id + ">" + (this.foods[i]).name + "</li>";
+        favList.html(htmlForFavorites);
         this.foods[i].fav = false;
       }
     }
@@ -91,6 +95,7 @@ function Pantry() {
   this.foods = [],
   this.currentId = 0,
   this.favoriteFoods = []
+
 }
 
 // Pantry.prototype.favoriteFoods = function(food) {
@@ -168,7 +173,7 @@ $(document).ready(function(){
     console.log(pantry);
 
 
-
+  //  displayFoodFavorite(favFoods);
     displayFoodDetails(pantry);
   })
 
