@@ -1,12 +1,12 @@
 // https://ndb.nal.usda.gov/ndb/search/list
-
+45127678
 function nutritionTableDraw(formattedData) {
   let formattedHTML = [];
 
   formattedData.forEach(function(entry) {
     formattedHTML.push(`<tr>
       <td>${entry.display_name}</td>
-      <td>${entry.value}${entry.unit}</td>
+      <td>${entry.value} ${entry.unit}</td>
     </tr>`)});
 
   $(".nutrition-info").show();
@@ -29,7 +29,7 @@ function nutritionDataGetter(data) {
     for (let e in incomingData) {
       if (incomingData[e].nutrient_id === newData[i].nid) {
         newData[i].value = incomingData[e].measures[0].value;
-        newData[i].unit = incomingData[e].measures[0].eunit;
+        newData[i].unit = incomingData[e].unit;
       }
     }
   }
@@ -70,6 +70,7 @@ function nutritionSearch(q) {
     .then(results=>{
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
       nutritionDataGetter(results.foods[0].food);
+      console.log(results.foods[0].food)
 
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
@@ -83,6 +84,11 @@ $(function() {
     $("#live-search-results").addClass("search-hidden");
   });
 
+  $("input#ndbno").blur(function() {
+    console.log('lost blur')
+    // $("#live-search-results").addClass("search-hidden");
+
+  })
 
   $("input#ndbno").keyup(function(event) {
     $("#live-search-results").removeClass("search-hidden");
