@@ -1,22 +1,23 @@
 // https://ndb.nal.usda.gov/ndb/search/list
-45127678
+
 function nutritionTableDraw(formattedData) {
   let formattedHTML = [];
 
   formattedData.forEach(function(entry) {
-    formattedHTML.push(`<tr>
-      <td>${entry.display_name}</td>
-      <td>${entry.value} ${entry.unit}</td>
-    </tr>`)});
+    if (entry.nid) {
+      formattedHTML.push(`<tr>
+        <td>${entry.display_name}</td>
+        <td>${entry.value} ${entry.unit}</td>
+      </tr>`);
+    }});
 
   $(".nutrition-info").show();
   $("#food-data").html(formattedHTML.join(""));
 }
 
 function nutritionDataGetter(data) {
-  const incomingData = data.nutrients;
-
-  let newData = [
+  let parsedData = [
+    {raw: data},
     {nid: "208", display_name: "Calories", value: null, unit: null},
     {nid: "307", display_name: "Sodium", value: null, unit: null},
     {nid: "204", display_name: "Fats", value: null, unit: null},
@@ -25,15 +26,20 @@ function nutritionDataGetter(data) {
     {nid: "269", display_name: "Sugars", value: null, unit: null}
   ];
 
-  for (let i =0; i< newData.length; i++) {
-    for (let e in incomingData) {
-      if (incomingData[e].nutrient_id === newData[i].nid) {
-        newData[i].value = incomingData[e].measures[0].value;
-        newData[i].unit = incomingData[e].unit;
+  for (let i =0; i< parsedData.length; i++) {
+    for (let e in data.nutrients) {
+      if (data.nutrients[e].nutrient_id === parsedData[i].nid) {
+        parsedData[i].value = data.nutrients[e].measures[0].value;
+        parsedData[i].unit = data.nutrients[e].unit;
       }
     }
   }
-  nutritionTableDraw(newData);
+  nutritionTableDraw(parsedData);
+
+  $("#add-food").click(function() {
+    // call food constructor here
+    console.log(parsedData)
+  })
 }
 
 function nbSearch(q) {
@@ -46,17 +52,16 @@ function nbSearch(q) {
 
       if(r.list.item){
         if (r.list.item.length===1) {
-          console.log('only one result')
+          // pressing enter will run nutritionSeach function with only captures result
+          console.log('only one result:',r.list.item[0].ndbno)
         }
         let htmlOutput = [];
         r.list.item.forEach(function(entry) {
           htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`);
         })
         $("#live-search-results").html(htmlOutput.join(""));
-        // console.log("NDB Id:",r.list.item)
       }
     }).catch(e=>{
-      console.log('no results found');
       $("#live-search-results").html(`<a class="dropdown-item" href="#" id="full">no results found</a>`);
     });
 }
@@ -70,7 +75,6 @@ function nutritionSearch(q) {
     .then(results=>{
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
       nutritionDataGetter(results.foods[0].food);
-      console.log(results.foods[0].food)
 
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
@@ -84,11 +88,6 @@ $(function() {
     $("#live-search-results").addClass("search-hidden");
   });
 
-  $("input#ndbno").blur(function() {
-    console.log('lost blur')
-    // $("#live-search-results").addClass("search-hidden");
-
-  })
 
   $("input#ndbno").keyup(function(event) {
     $("#live-search-results").removeClass("search-hidden");
