@@ -1,7 +1,7 @@
-html, body {
+/* html, body {
   width: 100%;
   height: 100%;
-}
+} */
 /*
 .wrapper {
   margin-left: auto;
@@ -45,7 +45,7 @@ html, body {
 
 
 .food-log {
-  /* float: right; */
+text-align: center;
 }
 
 footer {
