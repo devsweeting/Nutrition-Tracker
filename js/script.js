@@ -1,29 +1,39 @@
 // https://ndb.nal.usda.gov/ndb/search/list
 
-function nutritionTableDraw(tableData) {
-  console.log(tableData)
+function nutritionTableDraw(formattedData) {
+  let formattedHTML = [];
+
+  formattedData.forEach(function(entry) {
+    formattedHTML.push(`<tr>
+      <td>${entry.display_name}</td>
+      <td>${entry.value}${entry.unit}</td>
+    </tr>`)});
+
+  $("#food-data").html(formattedHTML.join(""));
 }
 
 function nutritionDataGetter(data) {
   const incomingData =  data.nutrients;
-  // nutrient_id: "208" (cals)
-  // nutrient_id: "307" (sodium)
-  // nutrient_id: "204" (fat)
-  // nutrient_id: "205" (carbs)
-  // nutrient_id: "203" (protein)
-  // nutrient_id: "269" (sugars)
-  const capturedData = ["208","307","204","205","203","269"];
-  let returnedData = [];
 
-  for (let i =0; i< capturedData.length; i++) {
+  let newData = [
+    {nid: "208", display_name: "Calories", value: null, unit: null},
+    {nid: "307", display_name: "Sodium", value: null, unit: null},
+    {nid: "204", display_name: "Fats", value: null, unit: null},
+    {nid: "205", display_name: "Carbohydrates", value: null, unit: null},
+    {nid: "203", display_name: "Protein", value: null, unit: null},
+    {nid: "269", display_name: "Sugars", value: null, unit: null}
+  ];
+
+  for (let i =0; i< newData.length; i++) {
     for (let e in incomingData) {
-      if (incomingData[e].nutrient_id === capturedData[i]) {
-        returnedData.push(incomingData[e])
+      if (incomingData[e].nutrient_id === newData[i].nid) {
+        newData[i].value = incomingData[e].measures[0].value;
+        newData[i].unit = incomingData[e].measures[0].eunit;
       }
     }
   }
-  nutritionTableDraw(returnedData)
-  return returnedData
+
+  nutritionTableDraw(newData);
 }
 
 function nbSearch(q) {
@@ -33,14 +43,11 @@ function nbSearch(q) {
   fetch(url)
     .then(response => response.json())
     .then(r=> {
-      // console.log(r)
       if(r.list.item){
         r.list.item.forEach(result => {
           console.log("name: ",result.name,"ndbno:",result.ndbno)
         })
-
         console.log("NDB Id:",r.list.item)
-
       }
     }).catch(e=>console.log('error in ndbno query:',e))
 }
