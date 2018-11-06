@@ -1,6 +1,42 @@
 // https://ndb.nal.usda.gov/ndb/search/list
 
-function nutritionOutput(data) {
+function nutritionTableDraw(tableData) {
+  console.log(tableData)
+
+  let rawHTML = `<table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col" colspan="2" id="name" >45239291</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Calories</td>
+          <td id="cals">cals</td>
+        <tr>
+          <td>Total fats</td>
+          <td id="fats">fats</td>
+        </tr>
+        <tr>
+          <td>Total carbs</td>
+          <td id="carbs">carbs</td>
+        </tr>
+        <tr>
+          <td>Protein</td>
+          <td id="protein">pro</td>
+        </tr>
+          <td>Sugars</td>
+          <td id="sugars">sugs</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+    <button type="button" name="button" id="add-food">Add to food tracker</button>`;
+
+}
+
+function nutritionDataGetter(data) {
   const incomingData =  data.nutrients;
   // nutrient_id: "208" (cals)
   // nutrient_id: "307" (sodium)
@@ -8,7 +44,6 @@ function nutritionOutput(data) {
   // nutrient_id: "205" (carbs)
   // nutrient_id: "203" (protein)
   // nutrient_id: "269" (sugars)
-
   const capturedData = ["208","307","204","205","203","269"];
   let returnedData = [];
 
@@ -19,6 +54,7 @@ function nutritionOutput(data) {
       }
     }
   }
+  nutritionTableDraw(returnedData)
   return returnedData
 }
 
@@ -30,7 +66,7 @@ function nbSearch(q) {
     .then(response => response.json())
     .then(r=> {
       console.log(r.list.item)
-      return r.list.item
+      // return r.list.item
     })
 }
 
@@ -41,12 +77,10 @@ function nutritionSearch(q) {
   fetch(url)
     .then(response=>response.json())
     .then(results=>{
-      // console.log(results.foods[0].food)
 
-      console.log(nutritionOutput(results.foods[0].food));
+      nutritionDataGetter(results.foods[0].food);
 
-      $(".output").html(results.foods[0].food.desc.name)
-      // return
+      $("th#name").html(results.foods[0].food.desc.name)
     })
 
 
@@ -55,7 +89,7 @@ function nutritionSearch(q) {
 
 $(function() {
   $("#ndbno").keyup(function() {
-    // nbSearch($("#ndbno").val());
+    nbSearch($("#ndbno").val());
 
   })
 
