@@ -17,13 +17,42 @@
     <title> </title>
   </head>
   <body>
+    <div class="jumbotron">
+      <div class="well">
+      </div>
+      <h1>Food Tracker</h1>
+    </div>
 
-    <div class="container">
-       <h1>Add Food</h1>
-       <div class="row">
+<!-- search bar -->
+    <div class="container searchbar">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search USDA Database..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="container-fluid row-body">
+      <div class="row">
+        <div class="col-md-2 sidenav">
+          <div class="well">
+
+            <h4>Favorite Foods</h4>
+            <ul id="favorites">
+              <!-- favorites added here -->
+            </ul>
+          </div>
+        </div>
+
+
+
+      <!-- <div class="row"> -->
          <div class="col-md-6">
-           <hr>
            <h2>Add Food</h2>
+           <hr>
            <form id="new-food">
              <label>Select a Type of Food</label>
              <div class="form-group">
@@ -66,30 +95,30 @@
              </div>
              <button type="submit" class="btn-primary">Add to daily Foods</button>
            </form>
-           <h3>Your Favorite foods</h3>
-           <ul id="favorites">
-
-           </ul>
          </div>
-           <div class="container">
-             <h3>Your daily foods</h3>
-             <ul id="pantry">
 
+           <div class="col-md-4">
+             <h4>Food log</h4>
+             <ul id="pantry">
+               <!-- Pantry added here -->
              </ul>
 
 
-           <div id="show-foods">
-            <p>Food: <span class="new-food-name"></span></p>
-            <p>Serving Size: <span class="new-serving-size"></span></p>
-            <p>Calories: <span class="new-calories"></span></p>
-            <p>Carbohydrates: <span class="new-carbohydrates"></span></p>
-            <p>Protein: <span class="new-protein"></span></p>
-            <p>Fat Content: <span class="new-fats"></span></p>
-            <p>Sodium Content: <span class="new-sodium"></span></p>
-            <p>Food Group: <span class="new-type"></span></p>
-            <div id="buttons">
-            </div>
-          </div>
+             <div id="show-foods" class="col-md-6 col-md-offset-6">
+               <p>Food: <span class="new-food-name"></span></p>
+               <p>Serving Size: <span class="new-serving-size"></span></p>
+               <p>Calories: <span class="new-calories"></span></p>
+               <p>Carbohydrates: <span class="new-carbohydrates"></span></p>
+               <p>Protein: <span class="new-protein"></span></p>
+               <p>Fat Content: <span class="new-fats"></span></p>
+               <p>Sodium Content: <span class="new-sodium"></span></p>
+               <p>Food Group: <span class="new-type"></span></p>
+               <div id="buttons">
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
 
   </body>
 </html>
