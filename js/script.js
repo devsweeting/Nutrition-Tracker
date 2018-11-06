@@ -2,38 +2,6 @@
 
 function nutritionTableDraw(tableData) {
   console.log(tableData)
-
-  let rawHTML = `<table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col" colspan="2" id="name" >45239291</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Calories</td>
-          <td id="cals">cals</td>
-        <tr>
-          <td>Total fats</td>
-          <td id="fats">fats</td>
-        </tr>
-        <tr>
-          <td>Total carbs</td>
-          <td id="carbs">carbs</td>
-        </tr>
-        <tr>
-          <td>Protein</td>
-          <td id="protein">pro</td>
-        </tr>
-          <td>Sugars</td>
-          <td id="sugars">sugs</td>
-        </tr>
-
-
-      </tbody>
-    </table>
-    <button type="button" name="button" id="add-food">Add to food tracker</button>`;
-
 }
 
 function nutritionDataGetter(data) {
@@ -54,7 +22,7 @@ function nutritionDataGetter(data) {
       }
     }
   }
-  nutritionTableDraw(returnedData)
+  // nutritionTableDraw(returnedData)
   return returnedData
 }
 
@@ -65,8 +33,7 @@ function nbSearch(q) {
   fetch(url)
     .then(response => response.json())
     .then(r=> {
-      console.log(r.list.item)
-      // return r.list.item
+      console.log("NDB Id:",r.list.item)
     })
 }
 
@@ -77,25 +44,20 @@ function nutritionSearch(q) {
   fetch(url)
     .then(response=>response.json())
     .then(results=>{
+      console.log("RAW:",results.foods[0]);
 
       nutritionDataGetter(results.foods[0].food);
-
-      $("th#name").html(results.foods[0].food.desc.name)
+      $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
+      $("th#name").html(results.foods[0].food.desc.name.replace(/,\sUPC:\s\d*$/g,""));
     })
-
-
 }
-
 
 $(function() {
   $("#ndbno").keyup(function() {
     nbSearch($("#ndbno").val());
-
-  })
+  });
 
   $("#submit").click(function() {
     nutritionSearch($("#ndbno").val())
   });
-
-
-})
+});
