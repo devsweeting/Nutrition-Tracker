@@ -127,22 +127,14 @@ Pantry.prototype.findFood = function(id) {
   }
 }
 
-Pantry.prototype.deleteFood = function(id) {
-  for (var i=0; i< this.foods.length; i++){
-    if (this.foods[i]) {
-      if (this.foods[i].id == id) {
-        delete this.foods[i];
-        return true;
-      }
-    }
-  };
-  return false;
+Pantry.prototype.deleteFood = function(foodAtIndex) {
+  delete this.foods[foodAtIndex];
 }
-
 //user interface logic
 
 function ui_showFoodDetails(food) {
   $("#show-foods").show();
+  $("#food-buttons").empty();
 
   $(".new-food-name").html(food.name);
   $(".new-calories").html(food.calories);
@@ -151,7 +143,9 @@ function ui_showFoodDetails(food) {
   $(".new-fats").html(food.fat);
   $(".new-sodium").html(food.sodium);
 
-  $("#food-button").html(`<button type="button" name="button" class="fav-heart" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
+  $("#food-buttons").append(`<button type="button" name="button" class="fav-heart" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
+
+  $("#food-buttons").append(`<button type="button" name="button" class="delete-food" food-id="${food.id}" id="${food.id}">Delete</button>`)
 }
 
 function ui_displayFood(pantryDisplay) {
@@ -166,6 +160,7 @@ function ui_displayFood(pantryDisplay) {
 };
 
 function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat) {
+
   pantry.addFood(new Food(inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat));
   ui_displayFood(pantry);
 }
@@ -190,6 +185,12 @@ $(document).ready(function(){
     pantry1.foods[$(this).attr('food-id')-1].fav = true;
 
     ui_FoodFavsDraw(pantry1.foods);
+    return false;
+  });
+
+  $(".food-log").on('click','.delete-food', function() {
+    pantry1.deleteFood($(this).attr('food-id')-1);
+    ui_displayFood(pantry1);
     return false;
   });
 
