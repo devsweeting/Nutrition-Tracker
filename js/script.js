@@ -244,6 +244,14 @@ $(document).ready(function(){
     return false;
   });
 
+  $("#ingredientList").click(function(){
+    $(".addSymbol").toggle();
+    $(".subSymbol").toggle();
+    $(".ingredients").toggle();
+  });
+
+
+
   $("form#new-food").submit(function(event){
     event.preventDefault();
     $("#show-foods").hide();
@@ -258,10 +266,6 @@ $(document).ready(function(){
     addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
     $("input").val("");
 
-    // $("#ingredientList").click(function(){
-    //   $(".addSymbol").toggle();
-    //   $(".subSymbol").toggle();
-    //   $(".ingredients").toggle();
 
 
   });
