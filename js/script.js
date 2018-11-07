@@ -209,6 +209,7 @@ $(document).ready(function(){
 
   $("ul#food-favorites").on("click", "li", function(){
     $("#show-foods").hide();
+    // console.log("clicked on food fav list", pantry1.favoriteFoods)
 
     let favFood = pantry1.favoriteFoods[this.id-1];
 
@@ -237,7 +238,6 @@ $(document).ready(function(){
   $(".food-log").on('click','.delete-food', function() {
     pantry1.deleteFood($(this).attr('food-id')-1);
     $("#show-foods").hide();
-
 
     ui_displayFood(pantry1);
 
