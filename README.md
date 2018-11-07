@@ -1,20 +1,51 @@
-# _New project template_
+# Food Tracker
 
-#### _Template that creates html/css/js environment. Includes Bootstrap 4.1.3 and jQuery 3.3.1_
+#### A daily food tracking app that allows users to add food consumed and track protein consumption
 
-#### By _DEV_
+#### By Katrina Hockman, Tavish O'Keefe, Ralph Perdomo, Devin Sweeting. November 2018
 
 ## Description
 
+A food tracking app that allows user to manually enter food they consumed or search the [USDA Food Composition Databases](https://ndb.nal.usda.gov/ndb/search/list) to quickly track food.
+
 ## Setup/Installation Requirements
 
-* clone this repository using `git clone https://github.com/ `
+* clone this repository using `git clone https://github.com/pseudoralph/food-tracker`
 * navigate to the downloaded repo
 * launch `index.html` in a browser of your choice
 
 ## Technologies Used
 
+HTML, CSS, JS and jQuery
+
 ## Specifications
+* It should let the user search for a food item
+  * Input: "pizza"
+  * Expected output: Will display results of food containing "pizza" in its name
+* It should let the user select a food item from the search results
+  * Input: Click "pizza"
+  * Expected output: Will populate form fields with USDA-linked data
+* It should let the modify USDA-populated fields
+  * Input: 400 in Calories form field
+  * Expected output: Will keep user's modified value
+* It should let the user manually add a food
+  * Input: Values entered in form
+  * Expected output: Will retain user's values
+* It should add text entered in form fields into food log
+  * Action: Clicking 'add to food log'
+  * Result: Will add food name to 'daily food log section'
+* It should show food details (ex: calories, protein) upon food log item  'click'
+  * Action: Click food name in food log
+  * Result: Populate nutrition data with foods Values
+* It should allow user to 'favorite' a food
+  * Action: Click favorite button in nutrition panel
+  * Result: Will add food to Favorite Foods panel
+* It should allow user to remove a food
+  * Action: Click delete button in nutrition panel
+  * Result: Will  remove food from daily food log
+* It should allow user to add food from Favorite Foods panel
+  * Action: Click food name in Favorite Foods panel
+  * Result: Food item added to daily food log
 
 ---
 
@@ -22,7 +53,7 @@
 
 MIT License
 
-Copyright (c) 2018, _DEV_
+Copyright (c) 2018, Katrina Hockman, Tavish O'Keefe, Ralph Perdomo, Devin Sweeting
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
