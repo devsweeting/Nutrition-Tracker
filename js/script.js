@@ -102,6 +102,8 @@ function Food (name, calories, carbs, sodium, protein, fat, fav=false) {
   this.protein = protein,
   this.fat = fat,
   this.fav = fav
+
+
 }
 // Daily pantry list
 
@@ -166,41 +168,30 @@ var broccoli =  new Food('broccoli', '3 cups', '50', '10', '4.2', '.5', '0.0mg')
 
 //user interface logic
 
-function attachFoodListeners(pantry) {
-  $("ul#pantry").on("click", "li", function(){
-    showFood(this.id, pantry);
-    displayFoodDetails(pantry);
-  });
 
-  $("#buttons").on("click", ".favoriteButton", function(){
-    // add food to fav list
-    pantry.foods[this.id -1].fav = true;
-    pantry.findFavorite();
-    pantry.addFavoriteToDisplay();
-  });
-};
+function ui_showFoodDetails(food) {
 
-function showFood (foodId, pantry) {
-  var food = pantry.findFood(foodId);
+  console.log(food)
   $("#show-foods").show();
+
   $(".new-food-name").html(food.name);
-  $(".new-serving-size").html(food.serving);
   $(".new-calories").html(food.calories);
   $(".new-carbohydrates").html(food.carbs);
-  $(".new-protein").html(food.sodium);
-  $(".new-fats").html(food.protein);
-  $(".new-sodium").html(food.fat);
-  $(".new-type").html(food.type);
-  var favButton = $("#buttons");
-  favButton.empty();
-  favButton.append("<button class='btn btn-success favoriteButton' id="  + food.id + ">Add to Favorites</button>");
+  $(".new-protein").html(food.protein);
+  $(".new-fats").html(food.fat);
+  $(".new-sodium").html(food.sodium);
+
+  $(".food-card").append(`<button type="button" name="button" class="fav-heart" id="heart-${food.id}">♥️</button>`);
+
 }
 
 
 
 
 
-function displayFoodDetails(pantryDisplay) {
+function ui_displayFood(pantryDisplay) {
+  // adds the food into a bulleted list
+
   var foodList = $("ul#pantry");
   var htmlForFoodInfo = "";
   pantryDisplay.foods.forEach(function(food) {
@@ -224,7 +215,7 @@ function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs,
 
 
   pantry.addFood(new Food(inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat));
-  displayFoodDetails(pantry);
+  ui_displayFood(pantry);
 
 
 }
@@ -233,22 +224,32 @@ function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs,
 $(document).ready(function(){
 
   var pantry1 = new Pantry();
-  attachFoodListeners(pantry1);
+  // attachFoodListeners(pantry1);
+
+  $("ul#pantry").on("click", "li", function(){
+    // listens for within daily food log and shows food's details
+    ui_showFoodDetails(pantry1.foods[this.id-1]);
+  });
+
+
+  $(".food-log").on('click','.fav-heart', function() {
+    console.log('clicl')
+  });
+
+
 
 
   $("form#new-food").submit(function(event){
     event.preventDefault();
 
-    let inputData = {
-      name: $("input#new-food-name").val(),
-      calories : parseInt($("input#new-calories").val()),
-      carbs : parseInt($("input#new-carbohydrates").val()),
-      protein : parseInt($("input#new-protein").val()),
-      fat : parseInt($("input#new-fats").val()),
-      sodium : parseInt($("input#new-sodium").val())
-    }
-
-    console.log(inputData)
+    // let inputData = {
+    //   name: $("input#new-food-name").val(),
+    //   calories : parseInt($("input#new-calories").val()),
+    //   carbs : parseInt($("input#new-carbohydrates").val()),
+    //   protein : parseInt($("input#new-protein").val()),
+    //   fat : parseInt($("input#new-fats").val()),
+    //   sodium : parseInt($("input#new-sodium").val())
+    // }
 
     var inputtedFoodName = $("input#new-food-name").val();
     var inputtedServingSize = parseInt($("input#new-serving-size").val());
@@ -272,7 +273,7 @@ $(document).ready(function(){
 
     // var newFood = new Food(inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
     // pantry.addFood(newFood);
-    // displayFoodDetails(pantry);
+    // ui_displayFood(pantry);
   });
 
   $("#live-search-results").on('click', 'a', function() {
