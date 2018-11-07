@@ -140,6 +140,44 @@ function ui_showFoodDetails(food) {
   $("#food-buttons").append(`<button type="button" name="button" class="delete-food" food-id="${food.id}" id="${food.id}">Delete</button>`)
 }
 
+function ui_nutritionProgress(allPantry) {
+  const foodsArray = allPantry.foods;
+
+  let daily_calories=0;
+  let daily_carbs=0;
+  let daily_fat=0;
+  let daily_protein=0;
+  let daily_sodium=0;
+
+  const dailyVals = {
+    calories: 2000,
+    carbs: 300,
+    fat: 50,
+    protein: 50,
+    sodium: 2300
+  }
+
+  for (var i = 0; i< foodsArray.length; i++) {
+    if (foodsArray[i]) {
+      daily_calories += parseInt(foodsArray[i].calories);
+      daily_carbs += parseInt(foodsArray[i].carbs);
+      daily_fat += parseInt(foodsArray[i].fat);
+      daily_protein += parseInt(foodsArray[i].protein);
+      daily_sodium += parseInt(foodsArray[i].sodium);
+    }
+  }
+
+  let computerDailyVals = {
+    calories: Math.floor((daily_calories/dailyVals.calories)*100),
+    carbs: Math.floor((daily_carbs/dailyVals.carbs)*100),
+    fat: Math.floor((daily_fat/dailyVals.fat)*100),
+    protein: Math.floor((daily_protein/dailyVals.protein)*100),
+    sodium: Math.floor((daily_sodium/dailyVals.sodium)*100)
+  }
+
+  console.log(computerDailyVals);
+}
+
 function ui_displayFood(pantryDisplay) {
   // adds the food into a bulleted list
   var foodList = $("ul#pantry");
@@ -147,8 +185,9 @@ function ui_displayFood(pantryDisplay) {
   pantryDisplay.foods.forEach(function(food) {
     htmlForFoodInfo += "<li id=" + food.id + ">" + food.name + "</li>";
   });
-  foodList.html(htmlForFoodInfo);
 
+  foodList.html(htmlForFoodInfo);
+  ui_nutritionProgress(pantryDisplay);
 };
 
 function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat) {
@@ -197,8 +236,10 @@ $(document).ready(function(){
 
   $(".food-log").on('click','.delete-food', function() {
     pantry1.deleteFood($(this).attr('food-id')-1);
-    ui_displayFood(pantry1);
     $("#show-foods").hide();
+
+
+    ui_displayFood(pantry1);
 
     return false;
   });
