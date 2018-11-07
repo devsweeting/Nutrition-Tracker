@@ -15,10 +15,17 @@
   right:32%;
   font-size: 87px;
   text-shadow: black 0.3em 0.3em 0.7em;
+  color: white;
 }
 
-#ingredient-list {
+/* #ingredient-list {
   display: none;
+} */
+
+#ingredients {
+  display: none;
+  margin: 8px;
+  padding: 8px;
 }
 
 
@@ -73,16 +80,20 @@ button {
   margin-bottom: 15px;
 }
 
+#hide-ingredients-text {
+  display: none;
+}
+
+#show-ingredients-text {
+  display: inline-block;
+}
+
 .addFood {
     background-color: rgba(10, 201, 144, .75);
     color: white;
 }
 
-#ingredients {
-  /* display: none; */
-  margin: 8px;
-  padding: 8px;
-}
+
 
 .subSymbol {
   display:none

@@ -16,7 +16,7 @@ function nutritionTableDraw(formattedData) {
 
 function sendToForm(data) {
   const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
-  console.log(data);
+  // console.log(data);
   $("input#new-food-name").val(data[0].raw.desc.name.replace(removeUPC,""));
   $("input#new-calories").val(data[1].value);
   $("input#new-sodium").val(data[2].value);
@@ -24,14 +24,7 @@ function sendToForm(data) {
   $("input#new-carbohydrates").val(data[4].value);
   $("input#new-protein").val(data[5].value);
 
-  // $("#ingredients").empty();
-
-  // $("#ingredient-list-button").show()
-
-  data[0].raw.ing ? ($("#ingredients").html("<small><strong>Ingredients: </strong>"+data[0].raw.ing.desc+"</small>")):($("#ingredients").html("<small><strong>Ingredients: </strong>Ingredients not provided</small>"))
-
-
-
+  data[0].raw.ing ? ($("#ingredients").html("<small><strong>Ingredients: </strong>"+data[0].raw.ing.desc+"</small>")):($("#ingredients").html("<small><strong>Ingredients: </strong>Ingredients not provided</small>"));
 }
 
 function nutritionDataGetter(data) {
@@ -67,10 +60,7 @@ function nbSearch(q) {
     .then(r=> {
 
       if(r.list.item){
-        // if (r.list.item.length===1) {
-        //   pressing enter will run nutritionSeach function with only captures result
-        //   console.log('only one result:',r.list.item[0].ndbno)
-        // }
+
         let htmlOutput = [];
         r.list.item.forEach(function(entry) {
           htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`);
@@ -92,7 +82,6 @@ function nutritionSearch(q) {
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
       nutritionDataGetter(results.foods[0].food);
 
-      // $("#ingredients").html("<small><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</small>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
 
     }).catch(e=>{
@@ -188,8 +177,6 @@ function ui_nutritionProgress(allPantry) {
   $("#fat-prg").css("width", computerDailyVals.fat+"%");
   $("#protein-prg").css("width", computerDailyVals.protein+"%");
   $("#sodium-prg").css("width", computerDailyVals.sodium+"%");
-
-  console.log(computerDailyVals.calories);
 }
 
 function ui_displayFood(pantryDisplay) {
@@ -259,12 +246,10 @@ $(document).ready(function(){
   });
 
   $("#ingredient-list-button").click(function(){
-    $(".addSymbol").toggle();
-    $(".subSymbol").toggle();
-    // $("#ingredients").toggle();
+    $("#show-ingredients-text").toggle();
+    $("#hide-ingredients-text").toggle();
+    $("#ingredients").toggle();
   });
-
-
 
   $("form#new-food").submit(function(event){
     event.preventDefault();
@@ -279,17 +264,18 @@ $(document).ready(function(){
 
     addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
     $("input").val("");
-    // $("#ingredients").hide();
-    // $("#ingredient-list-button").hide();
 
+    $("#ingredients").empty();
+    $("#ingredients").hide();
 
+    $("#hide-ingredients-text").hide();
+    $("#show-ingredients-text").show();
   });
 
   $("#live-search-results").on('click', 'a', function() {
     nutritionSearch(this.id);
     $("#live-search-results").addClass("search-hidden");
   });
-
 
   $("input#ndbno").keyup(function(event) {
     $("#live-search-results").removeClass("search-hidden");
@@ -300,7 +286,5 @@ $(document).ready(function(){
     event.key === "Escape" ? ($("#live-search-results").addClass("search-hidden")):(null);
   });
 
-  // $("#submit").click(function() {
-  //   nutritionSearch($("#ndbno").val());
-  // });
+
 });
