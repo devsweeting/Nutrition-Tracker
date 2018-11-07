@@ -46,6 +46,9 @@ HTML, CSS, JS and jQuery
 * It should allow user to add food from Favorite Foods panel
   * Action: Click food name in Favorite Foods panel
   * Result: Food item added to daily food log
+* It will add nutritional value to daily progress indicator
+  * Input: Food items with 50g Protein
+  * Expected output: Protein daily progress = 100%
 
 ---
 

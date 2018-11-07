@@ -175,7 +175,13 @@ function ui_nutritionProgress(allPantry) {
     sodium: Math.floor((daily_sodium/dailyVals.sodium)*100)
   }
 
-  console.log(computerDailyVals);
+  $("#calories-prg").css("width", computerDailyVals.calories+"%");
+  $("#carbs-prg").css("width", computerDailyVals.carbs+"%");
+  $("#fat-prg").css("width", computerDailyVals.fat+"%");
+  $("#protein-prg").css("width", computerDailyVals.protein+"%");
+  $("#sodium-prg").css("width", computerDailyVals.sodium+"%");
+
+  console.log(computerDailyVals.calories);
 }
 
 function ui_displayFood(pantryDisplay) {
