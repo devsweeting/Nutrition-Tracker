@@ -20,7 +20,7 @@
     <div class="jumbotron">
       <div class="asd">
       </div>
-      <h1>Food Tracker:</h1>
+      <h1 id="title"> Nutrition Tracker</h1>
     </div>
 
 
@@ -78,18 +78,17 @@
 
     <div class="container food-body" class="row mx-auto">
       <!-- start of body here -->
-
-      <div class="card col-md-3 sidenav">
-        <div class="card" id="box">
-          <h4 class="FF-heading">Favorite Foods:</h4>
+      <div class="col-md-3">
+        <div class="card-title rounded sidenav"><h4 class="FF-heading">Favorite Foods</h4>
         </div>
-        <br>
-
+        <div class="card box">
             <ul class="list-group list-group-flush" id="food-favorites">
               <!-- favorites added here -->
             </ul>
+          </div>
           <!-- </div> -->
-      </div>
+    </div>
+
 
         <div class="col-md-6">
           <h3>Add Food</h3>
@@ -126,7 +125,7 @@
               <input type="text"  class="form-control" id="new-sodium">
             </div>
 
-            <button type="submit" class="btn btn-success">Add to Food Log</button>
+            <button type="submit" class="btn rounded addFood">Add to Food Log</button>
             <button type="button" class="btn btn-secondary" id="ingredientList">See ingredients<span class="addSymbol">(+)</span><span class="subSymbol">(-)</span></button>
 
           </form>
@@ -165,7 +164,7 @@
           </div>
 
             <div class="card food-log">
-            <h4>Daily Food Log:</h4>
+            <h4>Daily Food Log</h4>
             <ul class="list-group list-group-flush" id="pantry">
               <!-- Pantry added here -->
             </ul>
