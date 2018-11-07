@@ -237,7 +237,7 @@ $(document).ready(function(){
     pantry1.foods[$(this).attr('food-id')-1].fav = true;
 
     console.log(pantry1.foods[$(this).attr('food-id')-1])
-    
+
 
     // console.log('click')
     // console.log($(this).attr('food-id'))
@@ -288,7 +288,7 @@ $(document).ready(function(){
     // pantry.addFood(newFood);
     // ui_displayFood(pantry);
   });
-
+// test
   $("#live-search-results").on('click', 'a', function() {
     nutritionSearch(this.id);
     $("#live-search-results").addClass("search-hidden");
