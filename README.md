@@ -49,6 +49,9 @@ HTML, CSS, JS and jQuery
 * It will add nutritional value to daily progress indicator
   * Input: Food items with 50g Protein
   * Expected output: Protein daily progress = 100%
+* It will delete nutritional value when food item is subtracted
+  * Input: Delete food item with 25g Protein
+  * Expected output: Protein daily progress = 50%
 
 ---
 

@@ -16,13 +16,21 @@ function nutritionTableDraw(formattedData) {
 
 function sendToForm(data) {
   const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
-
+  console.log(data);
   $("input#new-food-name").val(data[0].raw.desc.name.replace(removeUPC,""));
   $("input#new-calories").val(data[1].value);
   $("input#new-sodium").val(data[2].value);
   $("input#new-fats").val(data[3].value);
   $("input#new-carbohydrates").val(data[4].value);
   $("input#new-protein").val(data[5].value);
+
+  // $("#ingredients").empty();
+
+  // $("#ingredient-list-button").show()
+
+  data[0].raw.ing ? ($("#ingredients").html("<small><strong>Ingredients: </strong>"+data[0].raw.ing.desc+"</small>")):($("#ingredients").html("<small><strong>Ingredients: </strong>Ingredients not provided</small>"))
+
+
 
 }
 
@@ -84,7 +92,7 @@ function nutritionSearch(q) {
       const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
       nutritionDataGetter(results.foods[0].food);
 
-      $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
+      // $("#ingredients").html("<small><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</small>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
 
     }).catch(e=>{
@@ -250,10 +258,10 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#ingredientList").click(function(){
+  $("#ingredient-list-button").click(function(){
     $(".addSymbol").toggle();
     $(".subSymbol").toggle();
-    $(".ingredients").toggle();
+    // $("#ingredients").toggle();
   });
 
 
@@ -271,7 +279,8 @@ $(document).ready(function(){
 
     addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
     $("input").val("");
-
+    // $("#ingredients").hide();
+    // $("#ingredient-list-button").hide();
 
 
   });
