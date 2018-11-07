@@ -119,14 +119,6 @@ Pantry.prototype.assignId = function() {
   return this.currentId;
 }
 
-// Pantry.prototype.findFood = function(id) {
-//   for (var i=0; i<this.foods.length; i++) {
-//       if (this.foods[i].id == id) {
-//         return this.foods[i];
-//       }
-//   }
-// }
-
 Pantry.prototype.deleteFood = function(foodAtIndex) {
   delete this.foods[foodAtIndex];
 }
@@ -177,6 +169,7 @@ $(document).ready(function(){
   var pantry1 = new Pantry();
 
   $("ul#food-favorites").on("click", "li", function(){
+    $("#show-foods").hide();
 
     let favFood = pantry1.favoriteFoods[this.id-1];
 
@@ -205,11 +198,14 @@ $(document).ready(function(){
   $(".food-log").on('click','.delete-food', function() {
     pantry1.deleteFood($(this).attr('food-id')-1);
     ui_displayFood(pantry1);
+    $("#show-foods").hide();
+
     return false;
   });
 
   $("form#new-food").submit(function(event){
     event.preventDefault();
+    $("#show-foods").hide();
 
     var inputtedFoodName = $("input#new-food-name").val();
     var inputtedCalories = $("input#new-calories").val();
@@ -219,6 +215,7 @@ $(document).ready(function(){
     var inputtedSodium = $("input#new-sodium").val();
 
     addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
+    $("input").val("");
   });
 
   $("#live-search-results").on('click', 'a', function() {
@@ -229,12 +226,14 @@ $(document).ready(function(){
 
   $("input#ndbno").keyup(function(event) {
     $("#live-search-results").removeClass("search-hidden");
+    $("#show-foods").hide();
+
     nbSearch($("#ndbno").val());
 
     event.key === "Escape" ? ($("#live-search-results").addClass("search-hidden")):(null);
   });
 
-  $("#submit").click(function() {
-    nutritionSearch($("#ndbno").val());
-  });
+  // $("#submit").click(function() {
+  //   nutritionSearch($("#ndbno").val());
+  // });
 });
