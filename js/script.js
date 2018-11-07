@@ -217,6 +217,11 @@ $(document).ready(function(){
     $("select#typeOfFood").val("");
 
     addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
+
+  });
+
+  $("#ingredientList").click(function(event){
+    $(".ingredients").toggle();
   });
 
   $("#live-search-results").on('click', 'a', function() {

@@ -11,6 +11,22 @@
   display: none;
 }
 
+.live-search {
+    position: absolute;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
 
 .food-body{
   display: flex;
@@ -28,14 +44,14 @@
   margin-top: 10px;
 }
 
-footer {
-  background-color: #e5e5e5;
-  padding-top: 40px;
-  margin-top: 30px;
+button {
+  margin-bottom: 15px;
 }
 
-button {
-  margin-top: 10px;
+.ingredients {
+  display: none;
+  margin: 8px;
+  padding: 8px;
 }
 
 .nutrition-info {
@@ -53,21 +69,10 @@ margin-bottom: 20px;
   left: 0
 }
 
-.live-search {
-    position: absolute;
-    z-index: 1000;
-    float: left;
-    min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
-    font-size: 1rem;
-    color: #212529;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: .25rem;
+footer {
+  background-color: #e5e5e5;
+  padding-top: 40px;
+  margin-top: 30px;
 }
 
 .container {

@@ -90,7 +90,7 @@
       </div>
 
         <div class="col-md-6">
-          <h1>Add Food:</h1>
+          <h1>Add Food</h1>
           <hr>
           <form id="new-food">
 
@@ -124,8 +124,15 @@
               <input type="text"  class="form-control" id="new-sodium">
             </div>
 
-            <button type="submit" class="btn-success">Add to Food Log</button>
+            <button type="submit" class="btn btn-success">Add to Food Log</button>
+            <button type="button" class="btn btn-secondary" id="ingredientList">See ingredients(+)</button>
+
           </form>
+          <div class="card">
+            <div class="ingredients">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
         </div>
 
 
@@ -144,7 +151,7 @@
               <div class="card-text">
 
                 <div id="show-foods" class="food-card">
-                  <p>Food: <span class="new-food-name"></span></p>
+                  <p><span class="new-food-name"></span></p>
                   <p>Calories: <span class="new-calories"></span></p>
                   <p>Carbs: <span class="new-carbohydrates"></span></p>
                   <p>Protein: <span class="new-protein"></span></p>
