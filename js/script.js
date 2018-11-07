@@ -181,7 +181,7 @@ function ui_showFoodDetails(food) {
   $(".new-fats").html(food.fat);
   $(".new-sodium").html(food.sodium);
 
-  $(".food-card").append(`<button type="button" name="button" class="fav-heart" id="heart-${food.id}">♥️</button>`);
+  $(".food-card").append(`<button type="button" name="button" class="fav-heart" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
 
 }
 
@@ -201,15 +201,15 @@ function ui_displayFood(pantryDisplay) {
 
 };
 
-function displayFoodFavorite(favoriteDisplay) {
-  var favList = $("ul#favorites");
-  var htmlForFavorites = "";
-  favoriteDisplay.pantry.favoriteFoods.forEach(function(food) {
-    htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
-  });
-  favList.html(htmlForFavorites);
-
-};
+// function displayFoodFavorite(favoriteDisplay) {
+//   var favList = $("ul#favorites");
+//   var htmlForFavorites = "";
+//   favoriteDisplay.pantry.favoriteFoods.forEach(function(food) {
+//     htmlForFavorites += "<li id=" + food.id + ">" + food.name + "</li>";
+//   });
+//   favList.html(htmlForFavorites);
+//
+// };
 
 function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat) {
 
@@ -233,7 +233,20 @@ $(document).ready(function(){
 
 
   $(".food-log").on('click','.fav-heart', function() {
-    console.log('clicl')
+
+    pantry1.foods[$(this).attr('food-id')-1].fav = true;
+
+    console.log(pantry1.foods[$(this).attr('food-id')-1])
+    
+
+    // console.log('click')
+    // console.log($(this).attr('food-id'))
+    //
+    // // $("#favorites").append("<li id=" + this.favoriteFoods[endIndex].id+ ">" + this.favoriteFoods[endIndex].name + "</li>");
+    //
+    //
+
+    return false;
   });
 
 
