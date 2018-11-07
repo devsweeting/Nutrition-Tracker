@@ -17,14 +17,12 @@ function nutritionTableDraw(formattedData) {
 function sendToForm(data) {
   const removeUPC = /.\s[A-Z]{3,}.\s\d*$/g;
 
-  $("#add-food").click(function() {
-    $("input#new-food-name").val(data[0].raw.desc.name.replace(removeUPC,""));
-    $("input#new-calories").val(data[1].value)
-    $("input#new-sodium").val(data[2].value)
-    $("input#new-fats").val(data[3].value)
-    $("input#new-carbohydrates").val(data[4].value)
-    $("input#new-protein").val(data[5].value)
-  });
+  $("input#new-food-name").val(data[0].raw.desc.name.replace(removeUPC,""));
+  $("input#new-calories").val(data[1].value);
+  $("input#new-sodium").val(data[2].value);
+  $("input#new-fats").val(data[3].value);
+  $("input#new-carbohydrates").val(data[4].value);
+  $("input#new-protein").val(data[5].value);
 
 }
 
@@ -47,24 +45,24 @@ function nutritionDataGetter(data) {
       }
     }
   }
-  nutritionTableDraw(parsedData);
+  // nutritionTableDraw(parsedData);
   sendToForm(parsedData);
 
 }
 
 function nbSearch(q) {
   const apiKey = 'mhNpLtFVjwZ2FqugLnJYF8T4cCKIhiIGTAGOVSvP';
-  let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${q}&sort=n&max=25&offset=0&api_key=${apiKey}`;
+  let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${q}&sort=r&max=50&offset=0&api_key=${apiKey}`;
 
   fetch(url)
     .then(response => response.json())
     .then(r=> {
 
       if(r.list.item){
-        if (r.list.item.length===1) {
-          // pressing enter will run nutritionSeach function with only captures result
-          console.log('only one result:',r.list.item[0].ndbno)
-        }
+        // if (r.list.item.length===1) {
+        //   pressing enter will run nutritionSeach function with only captures result
+        //   console.log('only one result:',r.list.item[0].ndbno)
+        // }
         let htmlOutput = [];
         r.list.item.forEach(function(entry) {
           htmlOutput.push(`<a class="dropdown-item" href="#" id="${entry.ndbno}">${entry.name}</a>`);
@@ -89,7 +87,9 @@ function nutritionSearch(q) {
       $("#ingredients").html("<p><strong>Ingredients: </strong>"+results.foods[0].food.ing.desc+"</p>");
       $("th#name").html(results.foods[0].food.desc.name.replace(removeUPC,""));
 
-    }).catch(e=>console.log('error in search:',e));
+    }).catch(e=>{
+      // console.log('no search results')
+    });
 }
 
 function Food (name, calories, carbs, sodium, protein, fat, fav=false) {
@@ -138,12 +138,6 @@ Pantry.prototype.deleteFood = function(id) {
   };
   return false;
 }
-//example foods
-// var apple = new Food('apple', '1', '95', '25', '0', '0', '2mg');
-// var banana = new Food('banana', '1', '105', '27', '1.3', '0.4', '1mg');
-// var blueberries = new Food('blueberries', '1 cup', '85', '21', '1.1', '0.5', '1mg');
-// var orange = new Food('orange', '1', '45', '11', '0.9', '0.1', '0.0mg');
-// var broccoli =  new Food('broccoli', '3 cups', '50', '10', '4.2', '.5', '0.0mg');
 
 //user interface logic
 
@@ -241,4 +235,4 @@ $(document).ready(function(){
   $("#submit").click(function() {
     nutritionSearch($("#ndbno").val());
   });
-})
+});
