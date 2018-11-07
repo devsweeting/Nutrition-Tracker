@@ -126,9 +126,13 @@ function showFood (foodId, pantry) {
   $(".new-fats").html(food.protein);
   $(".new-sodium").html(food.fat);
   $(".new-type").html(food.type);
-  var favButton = $("#buttons");
+  var favButton = $("#add-fav-button");
+  var deleteButton = $("#delete-log-button");
   favButton.empty();
+  // deleteButton.empty();
   favButton.append("<button class='btn btn-success favoriteButton' id="  + food.id + ">Add to Favorites</button>");
+  // deleteButton.append("<button class='btn btn-danger deleteButton' id=" + + food.id + ">Delete from Log</button>");
+
 }
 
 function attachFoodListeners(pantry) {
@@ -137,12 +141,18 @@ function attachFoodListeners(pantry) {
     displayFoodDetails(pantry);
   });
 
-  $("#buttons").on("click", ".favoriteButton", function(){
+  $("#add-fav-button").on("click", ".favoriteButton", function(){
     // add food to fav list
+    console.log(pantry.foods, this.id);
     pantry.foods[this.id -1].fav = true;
     pantry.findFavorite();
     pantry.addFavoriteToDisplay();
   });
+
+  // $("#delete-log-button").on("click", ".deleteButton", function() {
+  //   pantry.deleteFood(this.id);
+  //   displayFoodDetails(pantry);
+  // })
 };
 
 // Daily pantry list

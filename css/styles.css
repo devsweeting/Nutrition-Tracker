@@ -1,26 +1,26 @@
 .jumbotron {
+  background-color: #0AC990;
   text-shadow: white 0.3em 0.3em 0.3em;
+  background-image: url(http://www.nawazabadfarm.com/wp-content/uploads/2012/04/banner-img1.png);
+  height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #show-foods {
   display: none;
 }
 
-.searchbar {
-  margin-bottom: 40px;
-}
 
 .food-body{
   display: flex;
   margin: auto;
-
-
 }
 
-.fav-body {
+.sidenav {
   text-align: center;
-  background-color: #95d6ab;
-  padding-bottom: 20px;
+  background-color: #0AC990;
+  /* padding-bottom: 20px; */
   padding-top: 10px;
 }
 
@@ -28,22 +28,10 @@
   margin-top: 10px;
 }
 
-.input-food {
-  margin-left: 10px;
-}
-
-
-.food-log {
-text-align: center;
-}
-
 footer {
   background-color: #e5e5e5;
   padding-top: 40px;
-}
-
-.well {
-  background-color: #FF8655;
+  margin-top: 30px;
 }
 
 button {
@@ -52,6 +40,11 @@ button {
 
 .nutrition-info {
   display: none;
+}
+
+.food-log {
+padding: 25px;
+margin-bottom: 20px;
 }
 
 .search-hidden {
@@ -75,4 +68,8 @@ button {
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
+}
+
+.container {
+  margin-bottom: 40px;
 }

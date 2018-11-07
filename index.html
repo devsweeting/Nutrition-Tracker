@@ -5,7 +5,7 @@
     <!-- JS: jQuery 3.3.1, Bootstrap's JS dependencies, & site's JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
     <script type="text/javascript" src="js/script.js"></script>
 
     <!-- CSS: Bootstrap & site styling -->
@@ -18,9 +18,9 @@
   </head>
   <body>
     <div class="jumbotron">
-      <div class="well">
+      <div class="asd">
       </div>
-      <h1>Food Tracker</h1>
+      <h1>Food Tracker:</h1>
     </div>
 
 
@@ -75,28 +75,22 @@
       <!-- usda search ends here -->
     </div>
 
+
+
     <div class="container food-body" class="row mx-auto">
       <!-- <div class="row mx-auto" > -->
-      <div class="col-md-2 sidenav">
-        <div class="well"></div>
-
-        <!-- <div class="container fav-body"> -->
+      <div class="card col-md-3 sidenav">
         <h4>Favorite Foods</h4>
-        <p>See your food log</p>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Food log</button>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Favorites</button>
         <div id="fav-dropdown" class="collapse">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           <ul id="favorites">
             <!-- favorites added here -->
           </ul>
         </div>
       </div>
 
-      <div class="col-md-5 input-food">
-        <h1>Add Food</h1>
         <div class="col-md-6">
+          <h1>Add Food:</h1>
           <hr>
           <form id="new-food">
             <label>Select a Type of Food</label>
@@ -149,22 +143,24 @@
             <button type="submit" class="btn-success">Add to Food Log</button>
           </form>
         </div>
-      </div>
 
-      <div class="food-log">
-        <div class="col-md-3 food-log">
-          <h4>Food log</h4>
-          <ul class="list-group" id="pantry">
-            <!-- Pantry added here -->
-          </ul>
 
-          <div class="card" style="width: 18rem;">
+
+        <div class="col-md-4 food-log">
+          <div class="card food-log">
+            <h4>Daily Food Log:</h4>
+              <ul class="list-group" id="pantry">
+                <!-- Pantry added here -->
+              </ul>
+            </div>
+
+          <div class="card">
             <img class="card-img-top" src="img/greens-nutrition.png" alt="greens-nutrition">
             <div class="card-body">
-              <h5 class="card-title">Nutrition Data</h5>
+              <h5 class="card-title">Nutrition Data:</h5>
               <div class="card-text">
 
-                <div id="show-foods" class="col-md-6 col-md-offset-6">
+                <div id="show-foods">
                   <p>Food: <span class="new-food-name"></span></p>
                   <p>Serving Size: <span class="new-serving-size"></span></p>
                   <p>Calories: <span class="new-calories"></span></p>
@@ -174,24 +170,13 @@
                   <p>Sodium Content: <span class="new-sodium"></span></p>
                   <p>Food Group: <span class="new-type"></span></p>
                 </div>
-                <div id="buttons"></div>
+                <div id="add-fav-button"></div>
+                <div id="delete-log-button"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-2">
-            <div class="well">
-              <p>Fruit</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
