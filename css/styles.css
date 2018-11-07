@@ -1,5 +1,5 @@
 .jumbotron {
-  background-color: #0AC990;
+  background-color: rgba(10, 201, 144, .75);
   text-shadow: white 0.3em 0.3em 0.3em;
   background-image: url(http://www.nawazabadfarm.com/wp-content/uploads/2012/04/banner-img1.png);
   height: 350px;
@@ -19,7 +19,7 @@
 
 .sidenav {
   text-align: center;
-  background-color: #0AC990;
+  background-color: rgba(10, 201, 144, .75);
   /* padding-bottom: 20px; */
   padding-top: 10px;
 }
