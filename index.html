@@ -81,9 +81,10 @@
       <!-- <div class="row mx-auto" > -->
       <div class="card col-md-3 sidenav">
         <h4>Favorite Foods</h4>
+        <p>See your food log</p>
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Favorites</button>
-        <div id="fav-dropdown" class="collapse">
-          <ul id="favorites">
+        <div id="fav-dropdown" >
+              <ul id="food-favorites">
             <!-- favorites added here -->
           </ul>
         </div>
@@ -93,17 +94,6 @@
           <h1>Add Food:</h1>
           <hr>
           <form id="new-food">
-            <label>Select a Type of Food</label>
-            <div class="form-group">
-              <select class="form-control" id="typeOfFood">
-                <option>Fruit</option>
-                <option>Vegetable</option>
-                <option>Meat, Poultry, Fish, Beans</option>
-                <option>Bread, Cereal, Rice, and Pasta</option>
-                <option>Dairy</option>
-                <option>Fats, Oils, and Sweets</option>
-              </select>
-            </div>
 
             <div class="form-group">
               <label for="new-food-name">Food Name</label>
@@ -111,39 +101,33 @@
             </div>
 
             <div class="form-group">
-              <label for="new-serving-size">Serving Size (g)</label>
-              <input type="text"  class="form-control" id="new-serving-size">
-            </div>
-
-            <div class="form-group">
-              <label for="new-calories">Calories</label>
+              <label for="new-calories">Calories (kcal)</label>
               <input type="text"  class="form-control" id="new-calories">
             </div>
 
             <div class="form-group">
-              <label for="new-carbohydrates">Carbohydrates</label>
+              <label for="new-carbohydrates">Carbohydrates (g)</label>
               <input type="text"  class="form-control" id="new-carbohydrates">
             </div>
 
             <div class="form-group">
-              <label for="new-protein">Protein</label>
+              <label for="new-protein">Protein (g)</label>
               <input type="text"  class="form-control" id="new-protein">
             </div>
 
             <div class="form-group">
-              <label for="new-fats">Fats</label>
+              <label for="new-fats">Fats (g)</label>
               <input type="text"  class="form-control" id="new-fats">
             </div>
 
             <div class="form-group">
-              <label for="new-sodium">Sodium</label>
+              <label for="new-sodium">Sodium (mg)</label>
               <input type="text"  class="form-control" id="new-sodium">
             </div>
 
             <button type="submit" class="btn-success">Add to Food Log</button>
           </form>
         </div>
-
 
 
         <div class="col-md-4 food-log">
@@ -160,18 +144,16 @@
               <h5 class="card-title">Nutrition Data:</h5>
               <div class="card-text">
 
-                <div id="show-foods">
+                <div id="show-foods" class="food-card">
                   <p>Food: <span class="new-food-name"></span></p>
-                  <p>Serving Size: <span class="new-serving-size"></span></p>
                   <p>Calories: <span class="new-calories"></span></p>
                   <p>Carbs: <span class="new-carbohydrates"></span></p>
                   <p>Protein: <span class="new-protein"></span></p>
-                  <p>Fat Content: <span class="new-fats"></span></p>
-                  <p>Sodium Content: <span class="new-sodium"></span></p>
-                  <p>Food Group: <span class="new-type"></span></p>
+                  <p>Fats: <span class="new-fats"></span></p>
+                  <p>Sodium: <span class="new-sodium"></span></p>
+                  <div id="food-button"></div>
                 </div>
-                <div id="add-fav-button"></div>
-                <div id="delete-log-button"></div>
+
               </div>
             </div>
           </div>
