@@ -77,20 +77,22 @@
 
 
     <div class="container food-body" class="row mx-auto">
-      <!-- <div class="row mx-auto" > -->
+      <!-- start of body here -->
+
       <div class="card col-md-3 sidenav">
-        <h4>Favorite Foods</h4>
-        <p>See your food log</p>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#fav-dropdown">Favorites</button>
-        <div id="fav-dropdown" >
-              <ul id="food-favorites">
-            <!-- favorites added here -->
-          </ul>
+        <div class="card" id="box">
+          <h4 class="FF-heading">Favorite Foods:</h4>
         </div>
+        <br>
+
+            <ul class="list-group list-group-flush" id="food-favorites">
+              <!-- favorites added here -->
+            </ul>
+          <!-- </div> -->
       </div>
 
         <div class="col-md-6">
-          <h1>Add Food</h1>
+          <h3>Add Food</h3>
           <hr>
           <form id="new-food">
 
@@ -125,7 +127,7 @@
             </div>
 
             <button type="submit" class="btn btn-success">Add to Food Log</button>
-            <button type="button" class="btn btn-secondary" id="ingredientList">See ingredients(+)</button>
+            <button type="button" class="btn btn-secondary" id="ingredientList">See ingredients<span class="addSymbol">(+)</span><span class="subSymbol">(-)</span></button>
 
           </form>
           <div class="card">
@@ -137,12 +139,37 @@
 
 
         <div class="col-md-4 food-log">
-          <div class="card food-log">
-            <h4>Daily Food Log:</h4>
-              <ul class="list-group" id="pantry">
-                <!-- Pantry added here -->
-              </ul>
+          <div id="progress-bar">
+            <h4>Daily Nutrition</h4>
+            <hr>
+            <h6>Calories</h6>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar" id="calories-prg" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
+            <h6>Carbohydrates</h6>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar" id="carbs-prg" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h6>Protein</h6>
+            <div class="progress"  style="height: 10px;">
+              <div class="progress-bar" id="protein-prg" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h6>Fats</h6>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar" id="fats-prg" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <h6>Sodium</h6>
+            <div class="progress" style="height: 10px;">
+              <div class="progress-bar" id="sodium-prg" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+            <div class="card food-log">
+            <h4>Daily Food Log:</h4>
+            <ul class="list-group list-group-flush" id="pantry">
+              <!-- Pantry added here -->
+            </ul>
+          </div>
 
           <div class="card">
             <img class="card-img-top" src="img/greens-nutrition.png" alt="greens-nutrition">

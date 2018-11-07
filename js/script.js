@@ -159,7 +159,7 @@ function ui_displayFood(pantryDisplay) {
   var foodList = $("ul#pantry");
   var htmlForFoodInfo = "";
   pantryDisplay.foods.forEach(function(food) {
-    htmlForFoodInfo += "<li id=" + food.id + ">" + food.name + "</li>";
+    htmlForFoodInfo += "<li class='list-group-item' id=" + food.id + ">" + food.name + "</li>";
   });
   foodList.html(htmlForFoodInfo);
 
@@ -174,7 +174,7 @@ function ui_FoodFavsDraw(foodFavsToFind) {
   $("#food-favorites").empty();
   foodFavsToFind.forEach(function (fav){
     if (fav.fav === true){
-      $("#food-favorites").append(`<li id="${fav.id}">${fav.name}</li>`)
+      $("#food-favorites").append(`<li class='list-group-item' id="${fav.id}">${fav.name}</li>`)
     }
   })
 }
@@ -221,6 +221,8 @@ $(document).ready(function(){
   });
 
   $("#ingredientList").click(function(event){
+    $(".addSymbol").toggle();
+    $(".subSymbol").toggle();
     $(".ingredients").toggle();
   });
 

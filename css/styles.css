@@ -34,10 +34,20 @@
 }
 
 .sidenav {
-  text-align: center;
-  background-color: rgba(10, 201, 144, .75);
+  height: auto;
+  background-color: rgba(10, 201, 144, .4);
   /* padding-bottom: 20px; */
-  padding-top: 10px;
+  padding-top: 10px
+}
+
+.FF-heading {
+  text-align: center;
+  padding: 15px
+
+}
+
+#box {
+  background-color: rgb(255,255,255,.6);
 }
 
 #fav-dropdown {
@@ -54,13 +64,45 @@ button {
   padding: 8px;
 }
 
+.subSymbol {
+  display:none
+}
+
 .nutrition-info {
   display: none;
+}
+
+.progress {
+  margin-bottom: 10px;
+}
+
+#calories-prg {
+  background-color: #67FFFD;
+}
+
+#carbs-prg {
+  background-color: #92E887;
+}
+
+#protein-prg {
+  background-color: #FFED73;
+}
+
+#fats-prg {
+  background-color: #E8BA96;
+}
+
+#sodium-prg {
+  background-color: #FF68A2;
 }
 
 .food-log {
 padding: 25px;
 margin-bottom: 20px;
+}
+
+.fav-heart {
+  color: red;
 }
 
 .search-hidden {
