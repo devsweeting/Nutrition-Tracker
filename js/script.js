@@ -24,6 +24,8 @@ function sendToForm(data) {
   $("input#new-carbohydrates").val(data[4].value);
   $("input#new-protein").val(data[5].value);
 
+  $("p#serving-num").html("1")
+
   data[0].raw.ing ? ($("#ingredients").html("<small><strong>Ingredients: </strong>"+data[0].raw.ing.desc+"</small>")):($("#ingredients").html("<small><strong>Ingredients: </strong>Ingredients not provided</small>"));
 }
 
@@ -47,6 +49,7 @@ function nutritionDataGetter(data) {
     }
   }
   // nutritionTableDraw(parsedData);
+  pantry1.foodInDisplay=parsedData;
   sendToForm(parsedData);
 
 }
@@ -89,21 +92,23 @@ function nutritionSearch(q) {
     });
 }
 
-function Food (name, calories, carbs, sodium, protein, fat, fav=false) {
+function Food (name, calories, carbs, sodium, protein, fat, fav=false, serving) {
   this.name = name,
   this.calories = calories,
   this.carbs = carbs,
   this.sodium = sodium,
   this.protein = protein,
   this.fat = fat,
-  this.fav = fav
+  this.fav = fav,
+  this.serving = serving
 }
 // Daily pantry list
 
 function Pantry() {
   this.foods = [],
   this.currentId = 0,
-  this.favoriteFoods = []
+  this.favoriteFoods = [],
+  this.foodInDisplay
 }
 
 Pantry.prototype.addFood = function(food) {
@@ -126,15 +131,15 @@ function ui_showFoodDetails(food) {
   $("#food-buttons").empty();
 
   $(".new-food-name").html(food.name);
+  $(".new-servings").html(food.serving);
   $(".new-calories").html(food.calories);
   $(".new-carbohydrates").html(food.carbs);
   $(".new-protein").html(food.protein);
   $(".new-fats").html(food.fat);
   $(".new-sodium").html(food.sodium);
 
-  // <i class="fas fa-grin-hearts"></i>
-  // $("#food-buttons").append(`<button type="button" name="button" class="fav-heart float-left" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
-    // $("#food-buttons").append(`<button type="button" name="button" class="btn-danger rounded delete-food" food-id="${food.id}" id="${food.id}">Delete</button>`)
+
+
 
   $("#food-buttons").append(`<i class="fas fa-grin-hearts fav-heart" food-id="${food.id}" id="heart-${food.id}"></i>`);
 
@@ -206,7 +211,7 @@ function ui_nutritionProgress(allPantry) {
   if (computerDailyVals.protein > 100) {
     $("#protein-num").css("color", "#ff8383");
   } else {
-    $("#protein-num").css("color", "#adadad");  
+    $("#protein-num").css("color", "#adadad");
   }
   if (computerDailyVals.sodium > 100) {
     $("#sodium-num").css("color", "#ff8383");
@@ -228,9 +233,8 @@ function ui_displayFood(pantryDisplay) {
   ui_nutritionProgress(pantryDisplay);
 };
 
-function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat) {
-
-  pantry.addFood(new Food(inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat));
+function addFoodToLog(pantry, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat, fav=false, serving) {
+  pantry.addFood(new Food(inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat,fav=false, serving));
   ui_displayFood(pantry);
 }
 
@@ -241,9 +245,9 @@ function ui_FoodFavsDraw(pantry) {
   })
 
 }
+var pantry1 = new Pantry();
 
 $(document).ready(function(){
-  var pantry1 = new Pantry();
 
   $("#clear-form").click(function() {
     $("input#new-food-name").val("");
@@ -252,6 +256,7 @@ $(document).ready(function(){
     $("input#new-protein").val("");
     $("input#new-fats").val("");
     $("input#new-sodium").val("");
+    $("p#serving-num").html("1")
   })
 
   $("ul#food-favorites").on("click", "li", function(){
@@ -271,6 +276,8 @@ $(document).ready(function(){
     $("input#new-protein").val(favFood.protein);
     $("input#new-fats").val(favFood.fat);
     $("input#new-sodium").val(favFood.sodium);
+
+    $("p#serving-num").html(favFood.serving)
 
   });
 
@@ -309,9 +316,12 @@ $(document).ready(function(){
     var inputtedProtein = $("input#new-protein").val();
     var inputtedFat = $("input#new-fats").val();
     var inputtedSodium = $("input#new-sodium").val();
+    var displayedServing = $("p#serving-num").html();
 
-    addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat);
+
+    addFoodToLog(pantry1, inputtedFoodName, inputtedCalories, inputtedCarbs, inputtedSodium, inputtedProtein, inputtedFat, fav=false, displayedServing);
     $("input").val("");
+    $("p#serving-num").html("1")
 
     $("#ingredients").empty();
     $("#ingredients").hide();
@@ -334,5 +344,34 @@ $(document).ready(function(){
     event.key === "Escape" ? ($("#live-search-results").addClass("search-hidden")):(null);
   });
 
+  $("#servings").on("click","i",function() {
+    let current = parseInt($("#serving-num").html());
+
+    if (this.id === "plus-serve") {
+      current++
+    }
+
+    if (this.id === "minus-serve") {
+      if (current>1) {
+        current--;
+      }
+    }
+    $("#serving-num").html(current)
+
+    if ($("input#new-food-name").val()) {
+      let base_cals = pantry1.foodInDisplay[1].value;
+      let base_sodium = pantry1.foodInDisplay[2].value;
+      let base_fats = pantry1.foodInDisplay[3].value;
+      let base_carbs = pantry1.foodInDisplay[4].value;
+      let base_protein = pantry1.foodInDisplay[5].value;
+
+      $("input#new-calories").val(base_cals*current);
+      $("input#new-carbohydrates").val(base_carbs*current);
+      $("input#new-protein").val(base_protein*current);
+      $("input#new-fats").val(base_fats*current);
+      $("input#new-sodium").val(base_sodium*current);
+    }
+
+  });
 
 });
