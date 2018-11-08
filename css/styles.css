@@ -18,16 +18,11 @@
   color: white;
 }
 
-/* #ingredient-list {
-  display: none;
-} */
-
 #ingredients {
   display: none;
   margin: 8px;
   padding: 8px;
 }
-
 
 #show-foods {
   display: none;
@@ -154,6 +149,10 @@ padding: 25px;
 margin-bottom: 20px;
 }
 
+.food-log h6 {
+text-align: left;
+}
+
 .fav-heart {
   color: red;
 }
@@ -162,12 +161,6 @@ margin-bottom: 20px;
   display: none;
   top: 100%
   left: 0
-}
-
-footer {
-  background-color: #e5e5e5;
-  padding-top: 40px;
-  margin-top: 30px;
 }
 
 .container {

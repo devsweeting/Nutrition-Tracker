@@ -181,6 +181,39 @@ function ui_nutritionProgress(allPantry) {
   $("#fat-prg").css("width", computerDailyVals.fat+"%");
   $("#protein-prg").css("width", computerDailyVals.protein+"%");
   $("#sodium-prg").css("width", computerDailyVals.sodium+"%");
+
+  $("#calories-num").html(`<small>${computerDailyVals.calories}% daily value</small>`);
+  $("#carbs-num").html(`<small>${computerDailyVals.carbs}% daily value</small>`);
+  $("#fat-num").html(`<small>${computerDailyVals.fat}% daily value</small>`);
+  $("#protein-num").html(`<small>${computerDailyVals.protein}% daily value</small>`);
+  $("#sodium-num").html(`<small>${computerDailyVals.sodium}% daily value</small>`);
+
+  if (computerDailyVals.calories > 100) {
+    $("#calories-num").css("color", "#ff8383");
+  } else {
+    $("#calories-num").css("color", "#adadad");
+  }
+  if (computerDailyVals.carbs > 100) {
+    $("#carbs-num").css("color", "#ff8383");
+  } else {
+    $("#carbs-num").css("color", "#adadad");
+  }
+  if (computerDailyVals.fat > 100) {
+    $("#fat-num").css("color", "#ff8383");
+  } else {
+    $("#fat-num").css("color", "#adadad");
+  }
+  if (computerDailyVals.protein > 100) {
+    $("#protein-num").css("color", "#ff8383");
+  } else {
+    $("#protein-num").css("color", "#adadad");  
+  }
+  if (computerDailyVals.sodium > 100) {
+    $("#sodium-num").css("color", "#ff8383");
+  } else {
+    $("#sodium-num").css("color", "#adadad");
+  }
+
 }
 
 function ui_displayFood(pantryDisplay) {

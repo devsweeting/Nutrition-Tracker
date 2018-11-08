@@ -3,10 +3,9 @@
   <head>
 
     <!-- JS: jQuery 3.3.1, Bootstrap's JS dependencies, & site's JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="js/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/script.js"></script>
 
     <!-- CSS: Bootstrap & site styling -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -17,7 +16,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
+    <title>Nutrition Tracker</title>
   </head>
   <body>
     <div class="jumbotron">
@@ -29,53 +28,13 @@
 
     <div class="container">
       <!-- usda begins ends here -->
-
-
     <div class="form-group">
       <label for="ndbno">&nbsp;</label>
       <input type="text" class="form-control" placeholder="Search for food" id="ndbno">
       <div class="live-search search-hidden" id="live-search-results" > </div>
-      <!-- <button type="button" class="btn btn-primary" name="button" id="submit">Search</button> -->
-      <!-- <button type="button" name="button" class="btn btn-primary" id="add-food">Add to food tracker</button> -->
-    </div>
-
-    <div class="col-md-6 output nutrition-info">
-      <table class="table table-striped ">
-        <thead>
-          <tr>
-            <th scope="col" colspan="2" id="name" ></th>
-          </tr>
-        </thead>
-        <tbody id="food-data">
-          <tr>
-            <td>Calories</td>
-            <td id="cals">cals</td>
-          <tr>
-            <td>Total fats</td>
-            <td id="fats">fats</td>
-          </tr>
-          <tr>
-            <td>Total carbs</td>
-            <td id="carbs">carbs</td>
-          </tr>
-          <tr>
-            <td>Protein</td>
-            <td id="protein">pro</td>
-          </tr>
-            <td>Sugars</td>
-            <td id="sugars">sugs</td>
-          </tr>
-
-
-        </tbody>
-      </table>
-      <div class="">
-        <button type="button" name="button" class="btn btn-primary" id="add-food">Add to food tracker</button>
       </div>
+        <!-- usda search ends here -->
     </div>
-      <!-- usda search ends here -->
-    </div>
-
 
 
     <div class="container food-body" class="row mx-auto">
@@ -143,25 +102,25 @@
           <div id="progress-bar">
             <h4>Daily Nutrition</h4>
             <hr>
-            <h6>Calories</h6>
+            <h6>Calories <span id="calories-num"></span></h6>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar" id="calories-prg" role="progressbar" ></div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated" id="calories-prg" role="progressbar" ></div>
             </div>
-            <h6>Carbohydrates</h6>
+            <h6>Carbohydrates <span id="carbs-num"></span></h6>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar" id="carbs-prg" role="progressbar" ></div>
+              <div class="progress-bar  progress-bar-striped progress-bar-animated" id="carbs-prg" role="progressbar" ></div>
             </div>
-            <h6>Protein</h6>
+            <h6>Protein <span id="protein-num"></span></h6>
             <div class="progress"  style="height: 10px;">
-              <div class="progress-bar" id="protein-prg" role="progressbar" ></div>
+              <div class="progress-bar  progress-bar-striped progress-bar-animated" id="protein-prg" role="progressbar" ></div>
             </div>
-            <h6>Fats</h6>
+            <h6>Fats <span id="fat-num"></span></h6>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar" id="fat-prg" role="progressbar" ></div>
+              <div class="progress-bar  progress-bar-striped progress-bar-animated" id="fat-prg" role="progressbar" ></div>
             </div>
-            <h6>Sodium</h6>
+            <h6>Sodium <span id="sodium-num"></span></h6>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar" id="sodium-prg" role="progressbar" ></div>
+              <div class="progress-bar  progress-bar-striped progress-bar-animated" id="sodium-prg" role="progressbar" ></div>
             </div>
           </div>
 
