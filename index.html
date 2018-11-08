@@ -40,76 +40,72 @@
     <div class="container food-body" class="row mx-auto">
       <!-- start of body here -->
       <div class="col-md-3">
-        <div class="card-title rounded sidenav"><h4 class="FF-heading">Favorite Foods</h4>
+        <div class="card-title rounded sidenav">
+          <h4 class="FF-heading">Favorite Foods</h4>
         </div>
         <div class="card box">
-            <ul class="list-group list-group-flush" id="food-favorites">
-              <!-- favorites added here -->
-            </ul>
-          </div>
-          <!-- </div> -->
-    </div>
-
-
-        <div class="col-md-6">
-          <div style="display: block; height: 50px;">
-
-            <div class="float-left">
-              <h3>Serving Size</h3>
-            </div>
-
-
-
-            <div id ="servings" class="float-right" style="color: #00ab00; font-size: 24px;">
-              <i id="minus-serve" class="fas fa-minus-circle"  style="margin-right: 10px;"></i>
-              <p id="serving-num" class="form-control" style="background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: 0.25rem; display: inline;">1</p>
-              <i id="plus-serve" class="fas fa-plus-circle" style="margin-left: 10px"></i>
-            </div>
-
-          </div>
-          <!-- <hr> -->
-          <form id="new-food">
-
-            <div class="form-group">
-              <label for="new-food-name">Food Name</label>
-              <input type="text"  class="form-control" id="new-food-name">
-            </div>
-
-            <div class="form-group">
-              <label for="new-calories">Calories (kcal)</label>
-              <input type="text"  class="form-control" id="new-calories">
-            </div>
-
-            <div class="form-group">
-              <label for="new-carbohydrates">Carbohydrates (g)</label>
-              <input type="text"  class="form-control" id="new-carbohydrates">
-            </div>
-
-            <div class="form-group">
-              <label for="new-protein">Protein (g)</label>
-              <input type="text"  class="form-control" id="new-protein">
-            </div>
-
-            <div class="form-group">
-              <label for="new-fats">Fats (g)</label>
-              <input type="text"  class="form-control" id="new-fats">
-            </div>
-
-            <div class="form-group">
-              <label for="new-sodium">Sodium (mg)</label>
-              <input type="text"  class="form-control" id="new-sodium">
-            </div>
-
-            <button type="submit" class="btn rounded addFood">Add to Food Log</button>
-            <button type="button" class="btn btn-secondary" id="ingredient-list-button">
-              <span id="show-ingredients-text">Show ingredients</span>
-              <span id="hide-ingredients-text">Hide ingredients</button>
-            <button type="button" class="btn btn-secondary rounded float-right" id="clear-form">Clear form</button>
-
-          </form>
-          <div class="card" id="ingredients">
-          </div>
+          <ul class="list-group list-group-flush" id="food-favorites">
+            <!-- favorites added here -->
+          </ul>
         </div>
+      </div>
+
+      <div class="col-md-6">
+        <div style="display: block; height: 50px;">
+
+          <div class="float-left">
+            <h3>Serving Size</h3>
+          </div>
+
+          <div id ="servings" class="float-right">
+            <i id="minus-serve" class="fas fa-minus-circle"></i>
+            <p id="serving-num" class="form-control">1</p>
+            <i id="plus-serve" class="fas fa-plus-circle"></i>
+          </div>
+
+        </div>
+
+        <form id="new-food">
+
+          <div class="form-group">
+            <label for="new-food-name">Food Name</label>
+            <input type="text"  class="form-control" id="new-food-name">
+          </div>
+
+          <div class="form-group">
+            <label for="new-calories">Calories (kcal)</label>
+            <input type="text"  class="form-control" id="new-calories">
+          </div>
+
+          <div class="form-group">
+            <label for="new-carbohydrates">Carbohydrates (g)</label>
+            <input type="text"  class="form-control" id="new-carbohydrates">
+          </div>
+
+          <div class="form-group">
+            <label for="new-protein">Protein (g)</label>
+            <input type="text"  class="form-control" id="new-protein">
+          </div>
+
+          <div class="form-group">
+            <label for="new-fats">Fats (g)</label>
+            <input type="text"  class="form-control" id="new-fats">
+          </div>
+
+          <div class="form-group">
+            <label for="new-sodium">Sodium (mg)</label>
+            <input type="text"  class="form-control" id="new-sodium">
+          </div>
+
+          <button type="submit" class="btn rounded addFood">Add to Food Log</button>
+          <button type="button" class="btn btn-secondary" id="ingredient-list-button">
+            <span id="show-ingredients-text">Show ingredients</span>
+            <span id="hide-ingredients-text">Hide ingredients</button>
+          <button type="button" class="btn btn-secondary rounded float-right" id="clear-form">Clear form</button>
+
+        </form>
+        <div class="card" id="ingredients"></div>
+      </div>
 
 
         <div class="col-md-4 food-log">

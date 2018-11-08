@@ -111,6 +111,34 @@ button {
   float: right;
 }
 
+#servings i {
+  cursor: pointer;
+}
+
+#servings {
+  color: #00ab00;
+  font-size: 24px;
+}
+
+#minus-serve {
+  margin-right: 10px;
+}
+
+#plus-serve {
+  margin-left: 10px
+}
+
+#serving-num {
+  background-color: #fff;
+  background-clip:
+  padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  display: inline;
+}
+
+
+
 .subSymbol {
   display:none
 }
