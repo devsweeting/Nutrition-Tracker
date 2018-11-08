@@ -14,6 +14,10 @@ A food tracking app that allows user to manually enter food they consumed or sea
 * navigate to the downloaded repo
 * launch `index.html` in a browser of your choice
 
+Alternatively, this site can be viewed at [https://pseudoralph.github.io/food-tracker/](https://pseudoralph.github.io/food-tracker/)
+
+
+
 ## Technologies Used
 
 HTML, CSS, JS and jQuery
@@ -47,11 +51,14 @@ HTML, CSS, JS and jQuery
   * Action: Click food name in Favorite Foods panel
   * Result: Food item added to daily food log
 * It will add nutritional value to daily progress indicator
-  * Input: Food items with 50g Protein
-  * Expected output: Protein daily progress = 100%
+  * Action: Food items with 50g Protein
+  * Result: Protein daily progress = 100%
 * It will delete nutritional value when food item is subtracted
-  * Input: Delete food item with 25g Protein
-  * Expected output: Protein daily progress = 50%
+  * Action: Delete food item with 25g Protein
+  * Result: Protein daily progress = 50%
+* It will update servings size
+  * Action: Click on +/- will increase/decrease serving Size
+  * Expected output: serving size will increment/decrement by one unit
 
 ---
 
