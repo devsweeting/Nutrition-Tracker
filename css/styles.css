@@ -55,6 +55,12 @@
   margin: auto;
 }
 
+.list-group-item:hover {
+  text-decoration: underline;
+  color: rgba(10, 201, 144, .75);
+  cursor: pointer;
+}
+
 .sidenav {
   height: auto;
   background-color: rgba(10, 201, 144, .5);
@@ -93,7 +99,22 @@ button {
     color: white;
 }
 
+.fav-heart {
+    color: rgba(10, 201, 144, .75) !important;
+    font-size: 35px;
+    float: left;
+    margin-right: 10px;
+}
 
+.delete-food {
+  color: rgb(255, 0, 0) !important;
+  font-size: 30px;
+  float: left;
+  margin-right: 10px;
+  padding: 5px;
+  margin-bottom: 18px;
+  float: right;
+}
 
 .subSymbol {
   display:none

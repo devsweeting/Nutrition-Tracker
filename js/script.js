@@ -132,9 +132,13 @@ function ui_showFoodDetails(food) {
   $(".new-fats").html(food.fat);
   $(".new-sodium").html(food.sodium);
 
-  $("#food-buttons").append(`<button type="button" name="button" class="fav-heart" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
+  // <i class="fas fa-grin-hearts"></i>
+  // $("#food-buttons").append(`<button type="button" name="button" class="fav-heart float-left" food-id="${food.id}" id="heart-${food.id}">♥️</button>`);
+    // $("#food-buttons").append(`<button type="button" name="button" class="btn-danger rounded delete-food" food-id="${food.id}" id="${food.id}">Delete</button>`)
 
-  $("#food-buttons").append(`<button type="button" name="button" class="delete-food" food-id="${food.id}" id="${food.id}">Delete</button>`)
+  $("#food-buttons").append(`<i class="fas fa-grin-hearts fav-heart" food-id="${food.id}" id="heart-${food.id}"></i>`);
+
+  $("#food-buttons").append(`<i class="delete-food fas fa-trash-alt" food-id="${food.id}" id="${food.id}"></i>`);
 }
 
 function ui_nutritionProgress(allPantry) {
