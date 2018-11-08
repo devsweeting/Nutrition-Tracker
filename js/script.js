@@ -212,12 +212,26 @@ function ui_FoodFavsDraw(pantry) {
 $(document).ready(function(){
   var pantry1 = new Pantry();
 
+  $("#clear-form").click(function() {
+    $("input#new-food-name").val("");
+    $("input#new-calories").val("");
+    $("input#new-carbohydrates").val("");
+    $("input#new-protein").val("");
+    $("input#new-fats").val("");
+    $("input#new-sodium").val("");
+  })
+
   $("ul#food-favorites").on("click", "li", function(){
     $("#show-foods").hide();
-    // console.log("clicked on food fav list", pantry1.favoriteFoods)
+    let idToFind = parseInt(this.id);
+    let favFood;
 
-    let favFood = pantry1.favoriteFoods[this.id-1];
+    for (let i=0; i < pantry1.favoriteFoods.length; i++) {
 
+      if (pantry1.favoriteFoods[i].id === idToFind) {
+        favFood = pantry1.favoriteFoods[i];
+        }
+    }
     $("input#new-food-name").val(favFood.name);
     $("input#new-calories").val(favFood.calories);
     $("input#new-carbohydrates").val(favFood.carbs);
@@ -235,7 +249,6 @@ $(document).ready(function(){
   $(".food-log").on('click','.fav-heart', function() {
     pantry1.foods[$(this).attr('food-id')-1].fav = true;
     pantry1.favoriteFoods.push(pantry1.foods[$(this).attr('food-id')-1]);
-
     ui_FoodFavsDraw(pantry1);
     return false;
   });
@@ -243,9 +256,7 @@ $(document).ready(function(){
   $(".food-log").on('click','.delete-food', function() {
     pantry1.deleteFood($(this).attr('food-id')-1);
     $("#show-foods").hide();
-
     ui_displayFood(pantry1);
-
     return false;
   });
 
